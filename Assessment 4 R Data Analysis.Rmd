@@ -3,8 +3,61 @@ title: "Assessment 4 R Data Analysis"
 author: "Natasha Ford, Kahla Finch, Devanshee Alpeshkumar Gandhi"
 date: "2024-09-25"
 output: html_document
+fig_width: 10
 ---
-```{r}
 
+# **Part 1**
+
+
+## Download Data files
+
+```{r Download Data}
+URL1="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/growth_data.csv"
+download.file(URL1,destfile="Growth_Data.csv")
+
+URL2="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv"
+download.file(URL2,destfile="Gene_Expression.csv")
+```
+
+
+## Gene Expression Data
+The file “gene_expression.tsv” contains RNA-seq count data for three samples of interest.
+
+
+### Read in the file, making the gene identifiers the row names. Show a table of values for the first six genes.
+
+```{r Read in File}
+library(readr)
+Gene_Expression <- read.table("https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv",stringsAsFactors = FALSE, header=TRUE, row.names=1)
+
+head(Gene_Expression)
+```
+
+
+### Make a new column which is the mean of the other columns. Show a table of values for the first six genes.
+```{r Calculating Mean values}
+Gene_Expression$Mean_value <- rowMeans(Gene_Expression, na.rm = TRUE)
+head(Gene_Expression)
+```
+
+
+### List the 10 genes with the highest mean expression
+```{r 10 genes with the highest mean expression}
+Sorted_Genes <- Gene_Expression[order(-Gene_Expression$Mean_value), ]
+Top10_Mean <- head(Sorted_Genes, 10)
+print(Top10_Mean)
+```
+
+### Determine the number of genes with a mean <10
+```{r Number of genes with mean less than 10}
+
+Low_Mean <- subset(Gene_Expression, Mean_value < 10)
+nrow(Low_Mean)
+```
+
+
+### Session Info
+```{r}
+sessionInfo()
 ```
 
