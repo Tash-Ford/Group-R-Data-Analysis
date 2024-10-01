@@ -180,8 +180,10 @@ length(salmonella)
 To download the Salmonella enterica subsp. enterica serovar Weltevreden (GCA_005518735), (Salmonella) file, the download.file command was used, along with the gunzip command to remove the zip format from the FASTA file.
 
 ### Downloading Coding DNA of E.coli
+
 ```{r}
 ecoli_URL <- "http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz"
+
 download.file(ecoli_URL,destfile = "ecoli.fa.gz")
 gunzip("ecoli.fa.gz")
 
