@@ -59,8 +59,7 @@ nrow(Low_Mean)
 hist(Gene_Expression$Mean_value,breaks=1000, xlim = c(0,60000), xlab = "Mean Value of Gene Expression",main="Histogram of Mean values of Gene Expression")
 
 ```
-
-The Histogram shown in the above figure displays the mean values of the gene expression data.
+The Histogram shown in the above figure displays the mean values of the gene expression data.The histogram was created with the hist() command, which produces a histogram plot.
 
 ### Importing growth data csv file into R
 ```{r}
@@ -70,17 +69,22 @@ download.file(growth_data_URL,destfile="growth_data")
 growth_data <- read.csv("growth_data")
 head(growth_data)
 ```
+The growth data csv file was converted into a R object, via the download.file command.
+
 
 ### Column names of Growth Data 
 ```{r}
 colnames(growth_data)
 ```
+To determine the column names of the growth data file, the command colnames was used, and the column names can be seen in the output above.
+
 
 ### Mean and standard deviation at notheast and southwest sites at 2005 and 2020
-####Mean and standard deviation of northeast site at 2005
+
+#### Mean and standard deviation of northeast site at 2005
 ```{r}
 growth_northeast_2005 <- subset(growth_data, Site == "northeast", select = c("Circumf_2005_cm"))
-growth_northeast_2005 
+head(growth_northeast_2005)
 
 mean_growth_northeast_2005 <- mean(growth_northeast_2005$Circumf_2005_cm)
 mean_growth_northeast_2005
@@ -88,11 +92,12 @@ mean_growth_northeast_2005
 SD_growth_northeast_2005 <- sd(growth_northeast_2005$Circumf_2005_cm)
 SD_growth_northeast_2005
 ```
+To determine the mean and standard deviation of northeast site at 2005, the completegrowth data was subsetted into northeast 2005 and mean() and SD() commands were used.
 
-####Mean and standard deviation of northeast site at 2020
+#### Mean and standard deviation of northeast site at 2020
 ```{r}
 growth_northeast_2020 <- subset(growth_data, Site == "northeast", select = c("Circumf_2020_cm"))
-growth_northeast_2020
+head(growth_northeast_2020)
 
 mean_growth_northeast_2020 <- mean(growth_northeast_2020$Circumf_2020_cm)
 mean_growth_northeast_2020
@@ -100,12 +105,12 @@ mean_growth_northeast_2020
 SD_growth_northeast_2020 <- sd(growth_northeast_2020$Circumf_2020_cm)
 SD_growth_northeast_2020
 ```
+To determine the mean and standard deviation of northeast site at 2020, the complete growth data was subsetted into northeast 2020 and mean() and SD() commands were used.
 
-
-####Mean and standard deviation of southwest site at 2005
+#### Mean and standard deviation of southwest site at 2005
 ```{r}
 growth_southwest_2005 <- subset(growth_data, Site == "southwest", select = c("Circumf_2005_cm"))
-growth_southwest_2005
+head(growth_southwest_2005)
 
 mean_growth_southwest_2005 <- mean(growth_southwest_2005$Circumf_2005_cm)
 mean_growth_southwest_2005
@@ -113,12 +118,13 @@ mean_growth_southwest_2005
 SD_growth_southwest_2005 <- sd(growth_southwest_2005$Circumf_2005_cm)
 SD_growth_southwest_2005
 ```
+To determine the mean and standard deviation of southwest site at 2005, the complete growth data was subsetted into southwest 2005 and mean() and SD() commands were used.
 
-####Mean and standard deviation of southwest site at 2020
+#### Mean and standard deviation of southwest site at 2020
 ```{r}
 
 growth_southwest_2020 <- subset(growth_data, Site == "southwest", select = c("Circumf_2020_cm"))
-growth_southwest_2020
+head(growth_southwest_2020)
 
 mean_growth_southwest_2020 <- mean(growth_southwest_2020$Circumf_2020_cm)
 mean_growth_southwest_2020
@@ -126,11 +132,94 @@ mean_growth_southwest_2020
 SD_growth_southwest_2020 <- sd(growth_southwest_2020$Circumf_2020_cm)
 SD_growth_southwest_2020
 ```
+To determine the mean and standard deviation of southwest site at 2020, the complete growth data was subsetted into southwest 2020 and mean() and SD() commands were used.
+
+### Table summary of mean and standard deviation 
+```{r}
+mean_SD_table <- data.frame(col1 = c((mean_growth_northeast_2005),(SD_growth_northeast_2005)),
+                      col2 = c((mean_growth_northeast_2020),(SD_growth_northeast_2020)),
+                      col3 = c((mean_growth_southwest_2005),(SD_growth_southwest_2005)),
+                      col4 = c((mean_growth_southwest_2020),(SD_growth_southwest_2020)))
+colnames(mean_SD_table) <- c("Northeast 2005","Northeast 2020","Southwest 2005","Southwest 2020")
+rownames(mean_SD_table) <- c("Mean", "Standard Deviation")
+mean_SD_table
+```
+To provide the table above a data frame was created with the mean and standard deviation results from the northeast and southwest sites and 2005 and 2020.
 
 
 
 
+******** part 1 questions 8,9,10 to go here 
 
+
+
+# Part 2
+
+### Downloading Coding DNA of Salmonella 
+```{r}
+install.packages("seqinr")
+library("seqinr")
+install.packages("R.utils")
+library("R.utils")
+
+salmonella_URL <- "https://ftp.ensemblgenomes.ebi.ac.uk/pub/bacteria/release-59/fasta/bacteria_50_collection/salmonella_enterica_subsp_enterica_serovar_weltevreden_gca_005518735/cds/Salmonella_enterica_subsp_enterica_serovar_weltevreden_gca_005518735.ASM551873v1.cds.all.fa.gz"
+download.file(salmonella_URL,destfile = "Salmonella.fa.gz")
+gunzip("Salmonella.fa.gz")
+
+salmonella <- seqinr::read.fasta("Salmonella.fa")
+head(salmonella)
+
+length(salmonella)
+
+```
+To download the Salmonella enterica subsp. enterica serovar Weltevreden (GCA_005518735), (Salmonella) file, the download.file command was used, along with the gunzip command to remove the zip format from the FASTA file.
+
+### Downloading Coding DNA of E.coli
+```{r}
+ecoli_URL <- "http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz"
+download.file(ecoli_URL,destfile = "ecoli.fa.gz")
+gunzip("ecoli.fa.gz")
+
+
+e_coli <- seqinr::read.fasta("ecoli.fa")
+head(e_coli)
+
+length(e_coli)
+```
+To download the Escherichia coli str. K-12 substr. MG1655 str. K12 (GCA_000005845) (E.coli) file, the download.file command was used, along with the gunzip command to remove the zip format from the FASTA file.
+
+### Table displaying Coding DNA sequence legnth of Salmonella and E-coli
+
+```{r}
+Salmonella_E.coli <- as.table(rbind(c(length(salmonella),length(e_coli))))
+colnames(Salmonella_E.coli) <- c("Salmonella","E-coli")
+rownames(Salmonella_E.coli) <- "Coding DNA sequences"
+Salmonella_E.coli
+```
+
+The table shown above displays the amount of Coding DNA sequences, we can see a difference in length between Salmonella and E.coli, with Salmonella having 4585 coding DNA sequences and E.coli having 4239 coding DNA sequences.
+
+
+### Coding DNA in Salmonella and E-coli
+```{r}
+salmonella_length <-as.numeric(summary(salmonella)[,1])
+
+sum(salmonella_length)
+
+e_coli_length <- as.numeric(summary(e_coli)[,1])
+
+sum(e_coli_length)
+```
+### Table presenting total coding DNA in Salmonella and E-coli
+
+```{r}
+CodingDNA <- as.table(rbind(c(sum(salmonella_length),sum(e_coli_length))))
+colnames(CodingDNA) <- c("Salmonella","E-coli")
+rownames(CodingDNA) <- "Total Coding DNA"
+CodingDNA
+```
+
+The table shown above displays the amount of Coding DNA in total in both Salmonella and E.coli, we can see a difference in total amount of DNA between Salmonella and E.coli, with Salmonella having 4294851  coding DNA base pairs and E.coli having 3978528 coding DNA base pairs.
 
 
 
