@@ -155,13 +155,18 @@ To provide the table above a data frame was created with the mean and standard d
 
 # Part 2
 
-### Downloading Coding DNA of Salmonella 
+### installing packages 
 ```{r}
 install.packages("seqinr")
 library("seqinr")
 install.packages("R.utils")
 library("R.utils")
+```
 
+
+### Downloading Coding DNA of Salmonella 
+
+```{r}
 salmonella_URL <- "https://ftp.ensemblgenomes.ebi.ac.uk/pub/bacteria/release-59/fasta/bacteria_50_collection/salmonella_enterica_subsp_enterica_serovar_weltevreden_gca_005518735/cds/Salmonella_enterica_subsp_enterica_serovar_weltevreden_gca_005518735.ASM551873v1.cds.all.fa.gz"
 download.file(salmonella_URL,destfile = "Salmonella.fa.gz")
 gunzip("Salmonella.fa.gz")
