@@ -12,8 +12,6 @@ fig_width: 10
 ## Download Data files
 
 ```{r Download Data}
-URL1="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/growth_data.csv"
-download.file(URL1,destfile="Growth_Data.csv")
 
 URL2="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv"
 download.file(URL2,destfile="Gene_Expression.csv")
@@ -27,6 +25,7 @@ The file “gene_expression.tsv” contains RNA-seq count data for three samples
 ### Read in the file, making the gene identifiers the row names. Show a table of values for the first six genes.
 
 ```{r Read in File}
+install.packages("readr")
 library(readr)
 Gene_Expression <- read.table("https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv",stringsAsFactors = FALSE, header=TRUE, row.names=1)
 
@@ -54,6 +53,88 @@ print(Top10_Mean)
 Low_Mean <- subset(Gene_Expression, Mean_value < 10)
 nrow(Low_Mean)
 ```
+
+### Histogram of Mean Values
+```{r}
+hist(Gene_Expression$Mean_value,breaks=1000, xlim = c(0,60000), xlab = "Mean Value of Gene Expression",main="Histogram of Mean values of Gene Expression")
+
+```
+
+The Histogram shown in the above figure displays the mean values of the gene expression data.
+
+### Importing growth data csv file into R
+```{r}
+growth_data_URL <- "https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/growth_data.csv"
+download.file(growth_data_URL,destfile="growth_data")
+
+growth_data <- read.csv("growth_data")
+head(growth_data)
+```
+
+### Column names of Growth Data 
+```{r}
+colnames(growth_data)
+```
+
+### Mean and standard deviation at notheast and southwest sites at 2005 and 2020
+####Mean and standard deviation of northeast site at 2005
+```{r}
+growth_northeast_2005 <- subset(growth_data, Site == "northeast", select = c("Circumf_2005_cm"))
+growth_northeast_2005 
+
+mean_growth_northeast_2005 <- mean(growth_northeast_2005$Circumf_2005_cm)
+mean_growth_northeast_2005
+
+SD_growth_northeast_2005 <- sd(growth_northeast_2005$Circumf_2005_cm)
+SD_growth_northeast_2005
+```
+
+####Mean and standard deviation of northeast site at 2020
+```{r}
+growth_northeast_2020 <- subset(growth_data, Site == "northeast", select = c("Circumf_2020_cm"))
+growth_northeast_2020
+
+mean_growth_northeast_2020 <- mean(growth_northeast_2020$Circumf_2020_cm)
+mean_growth_northeast_2020
+
+SD_growth_northeast_2020 <- sd(growth_northeast_2020$Circumf_2020_cm)
+SD_growth_northeast_2020
+```
+
+
+####Mean and standard deviation of southwest site at 2005
+```{r}
+growth_southwest_2005 <- subset(growth_data, Site == "southwest", select = c("Circumf_2005_cm"))
+growth_southwest_2005
+
+mean_growth_southwest_2005 <- mean(growth_southwest_2005$Circumf_2005_cm)
+mean_growth_southwest_2005
+
+SD_growth_southwest_2005 <- sd(growth_southwest_2005$Circumf_2005_cm)
+SD_growth_southwest_2005
+```
+
+####Mean and standard deviation of southwest site at 2020
+```{r}
+
+growth_southwest_2020 <- subset(growth_data, Site == "southwest", select = c("Circumf_2020_cm"))
+growth_southwest_2020
+
+mean_growth_southwest_2020 <- mean(growth_southwest_2020$Circumf_2020_cm)
+mean_growth_southwest_2020
+
+SD_growth_southwest_2020 <- sd(growth_southwest_2020$Circumf_2020_cm)
+SD_growth_southwest_2020
+```
+
+
+
+
+
+
+
+
+
 
 
 ### Session Info

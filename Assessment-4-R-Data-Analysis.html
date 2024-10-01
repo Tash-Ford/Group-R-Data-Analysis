@@ -362,10 +362,7 @@ Gandhi</h4>
 <h1><strong>Part 1</strong></h1>
 <div id="download-data-files" class="section level2">
 <h2>Download Data files</h2>
-<pre class="r"><code>URL1=&quot;https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/growth_data.csv&quot;
-download.file(URL1,destfile=&quot;Growth_Data.csv&quot;)
-
-URL2=&quot;https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv&quot;
+<pre class="r"><code>URL2=&quot;https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv&quot;
 download.file(URL2,destfile=&quot;Gene_Expression.csv&quot;)</code></pre>
 </div>
 <div id="gene-expression-data" class="section level2">
@@ -375,6 +372,9 @@ samples of interest.</p>
 <div id="read-in-the-file-making-the-gene-identifiers-the-row-names.-show-a-table-of-values-for-the-first-six-genes." class="section level3">
 <h3>Read in the file, making the gene identifiers the row names. Show a
 table of values for the first six genes.</h3>
+<pre class="r"><code>install.packages(&quot;readr&quot;)</code></pre>
+<pre><code>## Installing package into &#39;/home/s218246565/R/x86_64-pc-linux-gnu-library/4.1&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
 <pre class="r"><code>library(readr)
 Gene_Expression &lt;- read.table(&quot;https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv&quot;,stringsAsFactors = FALSE, header=TRUE, row.names=1)
 
@@ -448,6 +448,418 @@ print(Top10_Mean)</code></pre>
 nrow(Low_Mean)</code></pre>
 <pre><code>## [1] 35988</code></pre>
 </div>
+<div id="histogram-of-mean-values" class="section level3">
+<h3>Histogram of Mean Values</h3>
+<pre class="r"><code>hist(Gene_Expression$Mean_value,breaks=1000, xlim = c(0,60000), xlab = &quot;Mean Value of Gene Expression&quot;,main=&quot;Histogram of Mean values of Gene Expression&quot;)</code></pre>
+<p><img src="data:image/png;base64,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" width="672" /></p>
+<p>The Histogram shown in the above figure displays the mean values of
+the gene expression data.</p>
+</div>
+<div id="importing-growth-data-csv-file-into-r" class="section level3">
+<h3>Importing growth data csv file into R</h3>
+<pre class="r"><code>growth_data_URL &lt;- &quot;https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/growth_data.csv&quot;
+download.file(growth_data_URL,destfile=&quot;growth_data&quot;)
+list.files()</code></pre>
+<pre><code>##  [1] &quot;Assessment 4 R Data Analysis.Rmd&quot;   &quot;Assessment 4 R Data Analysis.Rproj&quot;
+##  [3] &quot;Assessment-4-R-Data-Analysis_files&quot; &quot;Assessment-4-R-Data-Analysis.html&quot; 
+##  [5] &quot;Assessment-4-R-Data-Analysis.Rmd&quot;   &quot;Gene_Expression.csv&quot;               
+##  [7] &quot;Group-R-Data-Analysis.Rproj&quot;        &quot;growth_data&quot;                       
+##  [9] &quot;Growth_Data.csv&quot;                    &quot;README.md&quot;</code></pre>
+<pre class="r"><code>growth_data &lt;- read.csv(&quot;growth_data&quot;)
+growth_data </code></pre>
+<pre><code>##          Site TreeID Circumf_2005_cm Circumf_2010_cm Circumf_2015_cm
+## 1   northeast   A012             5.2            10.1            19.9
+## 2   southwest   A039             4.9             9.6            18.9
+## 3   southwest   A010             3.7             7.3            14.3
+## 4   northeast   A087             3.8             6.5            10.9
+## 5   southwest   A074             3.8             6.4            10.9
+## 6   northeast   A008             5.9            10.0            16.8
+## 7   northeast   A035             4.4             9.9            22.2
+## 8   northeast   A053             5.3             9.0            15.2
+## 9   southwest   A023             7.1            12.0            20.2
+## 10  southwest   A024             3.8             7.4            14.5
+## 11  southwest   A021             5.4            10.5            20.6
+## 12  northeast   A046             3.5             6.8            13.3
+## 13  southwest   A085             2.4             4.1             7.0
+## 14  southwest   A064             5.9            13.3            30.0
+## 15  southwest   A097             6.5            11.0            18.6
+## 16  southwest   A048             2.9             5.7            11.1
+## 17  northeast   A070             5.0             8.5            14.3
+## 18  northeast   A092             7.2            16.3            36.7
+## 19  southwest   A095             5.0            11.2            25.1
+## 20  southwest   A081             6.5            12.8            25.0
+## 21  northeast   A044             5.4            12.2            27.5
+## 22  southwest   A058             6.6            15.0            33.7
+## 23  southwest   A096             4.7            10.6            23.8
+## 24  northeast   A052             6.3            10.7            18.0
+## 25  southwest   A065             5.1            10.0            19.6
+## 26  northeast   A016             4.8            10.8            24.2
+## 27  southwest   A050             3.7             8.2            18.5
+## 28  northeast   A011             5.1            11.5            25.8
+## 29  southwest   A015             5.3            11.8            26.6
+## 30  northeast   A099             5.4            12.2            27.4
+## 31  northeast   A066             5.8             9.8            16.6
+## 32  southwest   A009             4.3             9.7            21.8
+## 33  southwest   A036             4.5            10.2            23.0
+## 34  northeast   A100             6.2            12.2            23.8
+## 35  northeast   A071             5.0             8.4            14.3
+## 36  southwest   A002             5.5            10.8            21.2
+## 37  southwest   A047             4.8             8.1            13.7
+## 38  southwest   A029             3.2             6.3            12.4
+## 39  southwest   A038             4.8             9.4            18.4
+## 40  northeast   A072             5.7            11.2            22.0
+## 41  southwest   A032             4.7             9.2            18.1
+## 42  southwest   A017             5.3             8.9            15.1
+## 43  southwest   A006             5.5             9.3            15.7
+## 44  northeast   A045             5.6             9.5            16.1
+## 45  northeast   A030             5.4            10.6            20.8
+## 46  northeast   A049             5.7             9.6            16.2
+## 47  southwest   A061             5.4            12.1            27.2
+## 48  northeast   A090             6.9            15.4            34.8
+## 49  northeast   A055             3.9             6.7            11.3
+## 50  southwest   A001             5.1            10.0            19.7
+## 51  southwest   A089             5.3            13.5            34.6
+## 52  northeast   A091             5.2            10.1            19.8
+## 53  northeast   A082             6.2            15.9            40.6
+## 54  southwest   A033             5.1            11.5            25.9
+## 55  northeast   A042             3.6             9.1            23.4
+## 56  northeast   A098             6.6            14.9            33.6
+## 57  northeast   A007             6.6            16.9            43.2
+## 58  northeast   A025             5.1            12.9            33.2
+## 59  northeast   A077             4.1            10.6            27.1
+## 60  northeast   A062             4.4             8.7            17.0
+## 61  northeast   A086             3.9             8.9            19.9
+## 62  northeast   A076             5.4            10.6            20.7
+## 63  southwest   A067             4.7            12.1            31.0
+## 64  southwest   A069             4.2             9.4            21.1
+## 65  southwest   A028             3.9             7.6            14.9
+## 66  southwest   A041             5.0            12.8            32.9
+## 67  southwest   A075             3.9             9.9            25.3
+## 68  northeast   A060             6.1            13.7            30.8
+## 69  northeast   A034             3.8             7.4            14.5
+## 70  southwest   A073             7.3            14.3            28.0
+## 71  northeast   A040             5.1            11.4            25.7
+## 72  southwest   A004             5.3            12.0            27.0
+## 73  northeast   A003             6.4            14.3            32.3
+## 74  southwest   A018             2.8             5.5            10.9
+## 75  northeast   A005             6.0            15.3            39.3
+## 76  northeast   A019             4.1             9.3            20.9
+## 77  northeast   A051             6.4            14.5            32.6
+## 78  southwest   A056             3.7             8.3            18.6
+## 79  northeast   A083             5.5            14.1            36.1
+## 80  southwest   A031             4.7            10.6            23.8
+## 81  northeast   A079             4.2             8.3            16.2
+## 82  northeast   A059             4.7             9.3            18.2
+## 83  southwest   A088             5.4            10.6            20.8
+## 84  southwest   A080             3.9            10.1            25.9
+## 85  southwest   A027             3.3             7.4            16.6
+## 86  southwest   A037             6.1            12.0            23.6
+## 87  southwest   A013             4.7            11.9            30.5
+## 88  northeast   A068             5.0            12.8            32.7
+## 89  southwest   A020             6.0            11.8            23.1
+## 90  northeast   A026             5.6            14.4            37.0
+## 91  northeast   A022             5.7            12.8            28.7
+## 92  southwest   A014             6.2            12.2            23.9
+## 93  northeast   A057             4.5             8.8            17.2
+## 94  northeast   A054             6.4            12.5            24.5
+## 95  northeast   A094             6.1            15.6            39.9
+## 96  southwest   A084             5.0             9.9            19.4
+## 97  northeast   A093             5.0            11.3            25.4
+## 98  southwest   A043             7.0            13.7            26.9
+## 99  southwest   A078             3.2             7.3            16.4
+## 100 northeast   A063             5.4            12.1            27.2
+##     Circumf_2020_cm
+## 1              38.9
+## 2              37.0
+## 3              28.1
+## 4              18.5
+## 5              18.4
+## 6              28.4
+## 7              50.0
+## 8              25.8
+## 9              34.2
+## 10             28.4
+## 11             40.5
+## 12             26.0
+## 13             11.8
+## 14             67.6
+## 15             31.4
+## 16             21.8
+## 17             24.2
+## 18             82.5
+## 19             56.5
+## 20             49.1
+## 21             61.8
+## 22             75.7
+## 23             53.6
+## 24             30.5
+## 25             38.4
+## 26             54.6
+## 27             41.7
+## 28             58.0
+## 29             59.9
+## 30             61.7
+## 31             28.0
+## 32             49.0
+## 33             51.8
+## 34             46.7
+## 35             24.1
+## 36             41.5
+## 37             23.1
+## 38             24.2
+## 39             36.0
+## 40             43.2
+## 41             35.5
+## 42             25.5
+## 43             26.5
+## 44             27.2
+## 45             40.9
+## 46             27.4
+## 47             61.2
+## 48             78.2
+## 49             19.0
+## 50             38.6
+## 51             88.7
+## 52             38.8
+## 53            103.9
+## 54             58.3
+## 55             59.8
+## 56             75.5
+## 57            110.6
+## 58             84.9
+## 59             69.3
+## 60             33.3
+## 61             44.8
+## 62             40.6
+## 63             79.3
+## 64             47.6
+## 65             29.2
+## 66             84.2
+## 67             64.9
+## 68             69.4
+## 69             28.5
+## 70             54.9
+## 71             57.7
+## 72             60.8
+## 73             72.6
+## 74             21.3
+## 75            100.6
+## 76             47.0
+## 77             73.4
+## 78             41.8
+## 79             92.4
+## 80             53.5
+## 81             31.8
+## 82             35.7
+## 83             40.8
+## 84             66.2
+## 85             37.4
+## 86             46.2
+## 87             78.0
+## 88             83.8
+## 89             45.3
+## 90             94.6
+## 91             64.6
+## 92             46.8
+## 93             33.7
+## 94             48.0
+## 95            102.0
+## 96             38.0
+## 97             57.2
+## 98             52.8
+## 99             36.8
+## 100            61.3</code></pre>
+</div>
+<div id="column-names-of-growth-data" class="section level3">
+<h3>Column names of Growth Data</h3>
+<pre class="r"><code>colnames(growth_data)</code></pre>
+<pre><code>## [1] &quot;Site&quot;            &quot;TreeID&quot;          &quot;Circumf_2005_cm&quot; &quot;Circumf_2010_cm&quot;
+## [5] &quot;Circumf_2015_cm&quot; &quot;Circumf_2020_cm&quot;</code></pre>
+</div>
+<div id="mean-and-standard-deviation-at-notheast-and-southwest-sites-at-2005-and-2020" class="section level3">
+<h3>Mean and standard deviation at notheast and southwest sites at 2005
+and 2020</h3>
+<p>####Mean and standard deviation of northeast site at 2005</p>
+<pre class="r"><code>growth_northeast_2005 &lt;- subset(growth_data, Site == &quot;northeast&quot;, select = c(&quot;Circumf_2005_cm&quot;))
+growth_northeast_2005 </code></pre>
+<pre><code>##     Circumf_2005_cm
+## 1               5.2
+## 4               3.8
+## 6               5.9
+## 7               4.4
+## 8               5.3
+## 12              3.5
+## 17              5.0
+## 18              7.2
+## 21              5.4
+## 24              6.3
+## 26              4.8
+## 28              5.1
+## 30              5.4
+## 31              5.8
+## 34              6.2
+## 35              5.0
+## 40              5.7
+## 44              5.6
+## 45              5.4
+## 46              5.7
+## 48              6.9
+## 49              3.9
+## 52              5.2
+## 53              6.2
+## 55              3.6
+## 56              6.6
+## 57              6.6
+## 58              5.1
+## 59              4.1
+## 60              4.4
+## 61              3.9
+## 62              5.4
+## 68              6.1
+## 69              3.8
+## 71              5.1
+## 73              6.4
+## 75              6.0
+## 76              4.1
+## 77              6.4
+## 79              5.5
+## 81              4.2
+## 82              4.7
+## 88              5.0
+## 90              5.6
+## 91              5.7
+## 93              4.5
+## 94              6.4
+## 95              6.1
+## 97              5.0
+## 100             5.4</code></pre>
+<pre class="r"><code>mean_growth_northeast_2005 &lt;- mean(growth_northeast_2005$Circumf_2005_cm)
+mean_growth_northeast_2005</code></pre>
+<pre><code>## [1] 5.292</code></pre>
+<pre class="r"><code>SD_growth_northeast_2005 &lt;- sd(growth_northeast_2005$Circumf_2005_cm)
+SD_growth_northeast_2005</code></pre>
+<pre><code>## [1] 0.9140267</code></pre>
+<p>####Mean and standard deviation of northeast site at 2020</p>
+<pre class="r"><code>growth_northeast_2020 &lt;- subset(growth_data, Site == &quot;northeast&quot;, select = c(&quot;Circumf_2020_cm&quot;))
+growth_northeast_2020</code></pre>
+<pre><code>##     Circumf_2020_cm
+## 1              38.9
+## 4              18.5
+## 6              28.4
+## 7              50.0
+## 8              25.8
+## 12             26.0
+## 17             24.2
+## 18             82.5
+## 21             61.8
+## 24             30.5
+## 26             54.6
+## 28             58.0
+## 30             61.7
+## 31             28.0
+## 34             46.7
+## 35             24.1
+## 40             43.2
+## 44             27.2
+## 45             40.9
+## 46             27.4
+## 48             78.2
+## 49             19.0
+## 52             38.8
+## 53            103.9
+## 55             59.8
+## 56             75.5
+## 57            110.6
+## 58             84.9
+## 59             69.3
+## 60             33.3
+## 61             44.8
+## 62             40.6
+## 68             69.4
+## 69             28.5
+## 71             57.7
+## 73             72.6
+## 75            100.6
+## 76             47.0
+## 77             73.4
+## 79             92.4
+## 81             31.8
+## 82             35.7
+## 88             83.8
+## 90             94.6
+## 91             64.6
+## 93             33.7
+## 94             48.0
+## 95            102.0
+## 97             57.2
+## 100            61.3</code></pre>
+<pre class="r"><code>mean_growth_northeast_2020 &lt;- mean(growth_northeast_2020$Circumf_2020_cm)
+mean_growth_northeast_2020</code></pre>
+<pre><code>## [1] 54.228</code></pre>
+<pre class="r"><code>SD_growth_northeast_2020 &lt;- sd(growth_northeast_2020$Circumf_2020_cm)
+SD_growth_northeast_2020</code></pre>
+<pre><code>## [1] 25.22795</code></pre>
+<p>####Mean and standard deviation of southwest site at 2005</p>
+<pre class="r"><code>growth_southwest_2005 &lt;- subset(growth_data, Site == &quot;southwest&quot;, select = c(&quot;Circumf_2005_cm&quot;))
+growth_southwest_2005</code></pre>
+<pre><code>##    Circumf_2005_cm
+## 2              4.9
+## 3              3.7
+## 5              3.8
+## 9              7.1
+## 10             3.8
+## 11             5.4
+## 13             2.4
+## 14             5.9
+## 15             6.5
+## 16             2.9
+## 19             5.0
+## 20             6.5
+## 22             6.6
+## 23             4.7
+## 25             5.1
+## 27             3.7
+## 29             5.3
+## 32             4.3
+## 33             4.5
+## 36             5.5
+## 37             4.8
+## 38             3.2
+## 39             4.8
+## 41             4.7
+## 42             5.3
+## 43             5.5
+## 47             5.4
+## 50             5.1
+## 51             5.3
+## 54             5.1
+## 63             4.7
+## 64             4.2
+## 65             3.9
+## 66             5.0
+## 67             3.9
+## 70             7.3
+## 72             5.3
+## 74             2.8
+## 78             3.7
+## 80             4.7
+## 83             5.4
+## 84             3.9
+## 85             3.3
+## 86             6.1
+## 87             4.7
+## 89             6.0
+## 92             6.2
+## 96             5.0
+## 98             7.0
+## 99             3.2</code></pre>
+<pre class="r"><code>mean_growth_southwest_2005 &lt;- mean(growth_southwest_2005$Circumf_2005_cm)
+mean_growth_southwest_2005</code></pre>
+<pre><code>## [1] 4.862</code></pre>
+<pre class="r"><code>SD_growth_southwest_2005 &lt;- sd(growth_southwest_2005$Circumf_2005_cm)
+SD_growth_southwest_2005</code></pre>
+<pre><code>## [1] 1.147471</code></pre>
+</div>
 <div id="session-info" class="section level3">
 <h3>Session Info</h3>
 <pre class="r"><code>sessionInfo()</code></pre>
@@ -473,13 +885,13 @@ nrow(Low_Mean)</code></pre>
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] knitr_1.48        magrittr_2.0.3    hms_1.1.3         R6_2.5.1         
-##  [5] rlang_1.1.4       fastmap_1.2.0     fansi_1.0.6       tools_4.1.2      
-##  [9] xfun_0.47         utf8_1.2.4        cli_3.6.3         jquerylib_0.1.4  
-## [13] htmltools_0.5.8.1 yaml_2.3.10       digest_0.6.37     tibble_3.2.1     
-## [17] lifecycle_1.0.4   tzdb_0.4.0        sass_0.4.9        vctrs_0.6.5      
-## [21] glue_1.7.0        cachem_1.1.0      evaluate_1.0.0    rmarkdown_2.28   
-## [25] compiler_4.1.2    bslib_0.8.0       pillar_1.9.0      jsonlite_1.8.9   
-## [29] pkgconfig_2.0.3</code></pre>
+##  [5] rlang_1.1.4       fastmap_1.2.0     fansi_1.0.6       highr_0.11       
+##  [9] tools_4.1.2       xfun_0.47         utf8_1.2.4        cli_3.6.3        
+## [13] jquerylib_0.1.4   htmltools_0.5.8.1 yaml_2.3.10       digest_0.6.37    
+## [17] tibble_3.2.1      lifecycle_1.0.4   tzdb_0.4.0        sass_0.4.9       
+## [21] vctrs_0.6.5       glue_1.7.0        cachem_1.1.0      evaluate_1.0.0   
+## [25] rmarkdown_2.28    compiler_4.1.2    bslib_0.8.0       pillar_1.9.0     
+## [29] jsonlite_1.8.9    pkgconfig_2.0.3</code></pre>
 </div>
 </div>
 </div>
