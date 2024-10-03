@@ -372,10 +372,8 @@ samples of interest.</p>
 <div id="read-in-the-file-making-the-gene-identifiers-the-row-names.-show-a-table-of-values-for-the-first-six-genes." class="section level3">
 <h3>Read in the file, making the gene identifiers the row names. Show a
 table of values for the first six genes.</h3>
-<pre class="r"><code>install.packages(&quot;readr&quot;)</code></pre>
-<pre><code>## Installing package into &#39;/home/s218246565/R/x86_64-pc-linux-gnu-library/4.1&#39;
-## (as &#39;lib&#39; is unspecified)</code></pre>
-<pre class="r"><code>library(readr)
+<pre class="r"><code>#install.packages(&quot;readr&quot;)
+library(&quot;readr&quot;)
 Gene_Expression &lt;- read.table(&quot;https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv&quot;,stringsAsFactors = FALSE, header=TRUE, row.names=1)
 
 head(Gene_Expression)</code></pre>
@@ -486,8 +484,9 @@ download.file command.</p>
 <pre><code>## [1] &quot;Site&quot;            &quot;TreeID&quot;          &quot;Circumf_2005_cm&quot; &quot;Circumf_2010_cm&quot;
 ## [5] &quot;Circumf_2015_cm&quot; &quot;Circumf_2020_cm&quot;</code></pre>
 <p>To determine the column names of the growth data file, the command
-colnames was used, and the column names can be seen in the output
-above.</p>
+colnames was used, and the column names of “Site”,“TreeID”,
+“Circumf_2005_cm”, “Circumf_2010_cm”, “Circumf_2015_cm”and
+“Circumf_2020_cm” can be seen in the output above.</p>
 </div>
 <div id="mean-and-standard-deviation-at-notheast-and-southwest-sites-at-2005-and-2020" class="section level3">
 <h3>Mean and standard deviation at notheast and southwest sites at 2005
@@ -509,9 +508,9 @@ mean_growth_northeast_2005</code></pre>
 <pre class="r"><code>SD_growth_northeast_2005 &lt;- sd(growth_northeast_2005$Circumf_2005_cm)
 SD_growth_northeast_2005</code></pre>
 <pre><code>## [1] 0.9140267</code></pre>
-<p>To determine the mean and standard deviation of northeast site at
-2005, the completegrowth data was subsetted into northeast 2005 and
-mean() and SD() commands were used.</p>
+<p>To determine the mean of 5.292 cm and standard deviation of 0.914 cm
+at the northeast site at 2005, the complete growth data was subsetted
+into northeast 2005 and mean() and SD() commands were used.</p>
 </div>
 <div id="mean-and-standard-deviation-of-northeast-site-at-2020" class="section level4">
 <h4>Mean and standard deviation of northeast site at 2020</h4>
@@ -530,9 +529,9 @@ mean_growth_northeast_2020</code></pre>
 <pre class="r"><code>SD_growth_northeast_2020 &lt;- sd(growth_northeast_2020$Circumf_2020_cm)
 SD_growth_northeast_2020</code></pre>
 <pre><code>## [1] 25.22795</code></pre>
-<p>To determine the mean and standard deviation of northeast site at
-2020, the complete growth data was subsetted into northeast 2020 and
-mean() and SD() commands were used.</p>
+<p>To determine the mean of 54.228 cm and standard deviation of 25.22795
+cm at the northeast site at 2020, the complete growth data was subsetted
+into northeast 2020 and mean() and SD() commands were used.</p>
 </div>
 <div id="mean-and-standard-deviation-of-southwest-site-at-2005" class="section level4">
 <h4>Mean and standard deviation of southwest site at 2005</h4>
@@ -551,9 +550,9 @@ mean_growth_southwest_2005</code></pre>
 <pre class="r"><code>SD_growth_southwest_2005 &lt;- sd(growth_southwest_2005$Circumf_2005_cm)
 SD_growth_southwest_2005</code></pre>
 <pre><code>## [1] 1.147471</code></pre>
-<p>To determine the mean and standard deviation of southwest site at
-2005, the complete growth data was subsetted into southwest 2005 and
-mean() and SD() commands were used.</p>
+<p>To determine the mean of 4.862 cm and standard deviation of 1.147471
+cm at the southwest site at 2005, the complete growth data was subsetted
+into southwest 2005 and mean() and SD() commands were used.</p>
 </div>
 <div id="mean-and-standard-deviation-of-southwest-site-at-2020" class="section level4">
 <h4>Mean and standard deviation of southwest site at 2020</h4>
@@ -572,9 +571,9 @@ mean_growth_southwest_2020</code></pre>
 <pre class="r"><code>SD_growth_southwest_2020 &lt;- sd(growth_southwest_2020$Circumf_2020_cm)
 SD_growth_southwest_2020</code></pre>
 <pre><code>## [1] 17.87345</code></pre>
-<p>To determine the mean and standard deviation of southwest site at
-2020, the complete growth data was subsetted into southwest 2020 and
-mean() and SD() commands were used.</p>
+<p>To determine the mean of 45.596 cm and standard deviation of 17.87345
+cm at the southwest site at 2020, the complete growth data was subsetted
+into southwest 2020 and mean() and SD() commands were used.</p>
 </div>
 </div>
 <div id="table-summary-of-mean-and-standard-deviation" class="section level3">
@@ -589,25 +588,21 @@ mean_SD_table</code></pre>
 <pre><code>##                    Northeast 2005 Northeast 2020 Southwest 2005 Southwest 2020
 ## Mean                    5.2920000       54.22800       4.862000       45.59600
 ## Standard Deviation      0.9140267       25.22795       1.147471       17.87345</code></pre>
-<p>To provide the table above a data frame was created with the mean and
-standard deviation results from the northeast and southwest sites and
-2005 and 2020.</p>
+<p>To provide the table above, a data frame was created with the mean
+and standard deviation results from the northeast and southwest sites
+and 2005 and 2020.</p>
 <p>******** part 1 questions 8,9,10 to go here</p>
 </div>
 </div>
 </div>
 <div id="part-2" class="section level1">
-<h1>Part 2</h1>
+<h1><strong>Part 2</strong></h1>
 <div id="installing-packages" class="section level3">
-<h3>installing packages</h3>
-<pre class="r"><code>install.packages(&quot;seqinr&quot;)</code></pre>
-<pre><code>## Installing package into &#39;/home/s218246565/R/x86_64-pc-linux-gnu-library/4.1&#39;
-## (as &#39;lib&#39; is unspecified)</code></pre>
-<pre class="r"><code>library(&quot;seqinr&quot;)
-install.packages(&quot;R.utils&quot;)</code></pre>
-<pre><code>## Installing package into &#39;/home/s218246565/R/x86_64-pc-linux-gnu-library/4.1&#39;
-## (as &#39;lib&#39; is unspecified)</code></pre>
-<pre class="r"><code>library(&quot;R.utils&quot;)</code></pre>
+<h3>Installing packages</h3>
+<pre class="r"><code>#install.packages(&quot;seqinr&quot;)
+library(&quot;seqinr&quot;)
+#install.packages(&quot;R.utils&quot;)
+library(&quot;R.utils&quot;)</code></pre>
 <pre><code>## Loading required package: R.oo</code></pre>
 <pre><code>## Loading required package: R.methodsS3</code></pre>
 <pre><code>## R.methodsS3 v1.8.2 (2022-06-13 22:00:14 UTC) successfully loaded. See ?R.methodsS3 for help.</code></pre>
@@ -637,10 +632,10 @@ install.packages(&quot;R.utils&quot;)</code></pre>
 ##     cat, commandArgs, getOption, isOpen, nullfile, parse, warnings</code></pre>
 </div>
 <div id="downloading-coding-dna-of-salmonella" class="section level3">
-<h3>Downloading Coding DNA of Salmonella</h3>
+<h3>Downloading Coding DNA of <em>Salmonella</em></h3>
 <pre class="r"><code>salmonella_URL &lt;- &quot;https://ftp.ensemblgenomes.ebi.ac.uk/pub/bacteria/release-59/fasta/bacteria_50_collection/salmonella_enterica_subsp_enterica_serovar_weltevreden_gca_005518735/cds/Salmonella_enterica_subsp_enterica_serovar_weltevreden_gca_005518735.ASM551873v1.cds.all.fa.gz&quot;
 download.file(salmonella_URL,destfile = &quot;Salmonella.fa.gz&quot;)
-gunzip(&quot;Salmonella.fa.gz&quot;)
+#gunzip(&quot;Salmonella.fa.gz&quot;)
 
 salmonella &lt;- seqinr::read.fasta(&quot;Salmonella.fa&quot;)
 head(salmonella)</code></pre>
@@ -1020,17 +1015,17 @@ head(salmonella)</code></pre>
 ## [1] &quot;SeqFastadna&quot;</code></pre>
 <pre class="r"><code>length(salmonella)</code></pre>
 <pre><code>## [1] 4585</code></pre>
-<p>To download the Salmonella enterica subsp. enterica serovar
-Weltevreden (GCA_005518735), (Salmonella) file, the download.file
-command was used, along with the gunzip command to remove the zip format
-from the FASTA file.</p>
+<p>To download the <em>Salmonella enterica</em> subsp. enterica serovar
+Weltevreden (GCA_005518735), (<em>Salmonella</em>) file, the
+download.file command was used, along with the gunzip command to remove
+the zip format from the FASTA file.</p>
 </div>
 <div id="downloading-coding-dna-of-e.coli" class="section level3">
-<h3>Downloading Coding DNA of E.coli</h3>
+<h3>Downloading Coding DNA of <em>E.coli</em></h3>
 <pre class="r"><code>ecoli_URL &lt;- &quot;http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz&quot;
 
-download.file(ecoli_URL,destfile = &quot;ecoli.fa.gz&quot;)
-gunzip(&quot;ecoli.fa.gz&quot;)
+#download.file(ecoli_URL,destfile = &quot;ecoli.fa.gz&quot;)
+#gunzip(&quot;ecoli.fa.gz&quot;)
 
 
 e_coli &lt;- seqinr::read.fasta(&quot;ecoli.fa&quot;)
@@ -1410,10 +1405,10 @@ head(e_coli)</code></pre>
 ## [1] &quot;SeqFastadna&quot;</code></pre>
 <pre class="r"><code>length(e_coli)</code></pre>
 <pre><code>## [1] 4239</code></pre>
-<p>To download the Escherichia coli str. K-12 substr. MG1655 str. K12
-(GCA_000005845) (E.coli) file, the download.file command was used, along
-with the gunzip command to remove the zip format from the FASTA
-file.</p>
+<p>To download the <em>Escherichia coli</em> str. K-12 substr. MG1655
+str. K12 (GCA_000005845) (<em>E.coli</em>) file, the download.file
+command was used, along with the gunzip command to remove the zip format
+from the FASTA file.</p>
 </div>
 <div id="table-displaying-coding-dna-sequence-legnth-of-salmonella-and-e-coli" class="section level3">
 <h3>Table displaying Coding DNA sequence legnth of Salmonella and
@@ -1425,12 +1420,12 @@ Salmonella_E.coli</code></pre>
 <pre><code>##                      Salmonella E-coli
 ## Coding DNA sequences       4585   4239</code></pre>
 <p>The table shown above displays the amount of Coding DNA sequences, we
-can see a difference in length between Salmonella and E.coli, with
-Salmonella having 4585 coding DNA sequences and E.coli having 4239
-coding DNA sequences.</p>
+can see a difference in length between <em>Salmonella</em> and
+<em>E.coli</em>, with <em>Salmonella</em> having 4585 coding DNA
+sequences and <em>E.coli</em> having 4239 coding DNA sequences.</p>
 </div>
 <div id="coding-dna-in-salmonella-and-e-coli" class="section level3">
-<h3>Coding DNA in Salmonella and E-coli</h3>
+<h3>Coding DNA in <em>Salmonella</em> and <em>E-coli</em></h3>
 <pre class="r"><code>salmonella_length &lt;-as.numeric(summary(salmonella)[,1])
 
 sum(salmonella_length)</code></pre>
@@ -1441,7 +1436,8 @@ sum(e_coli_length)</code></pre>
 <pre><code>## [1] 3978528</code></pre>
 </div>
 <div id="table-presenting-total-coding-dna-in-salmonella-and-e-coli" class="section level3">
-<h3>Table presenting total coding DNA in Salmonella and E-coli</h3>
+<h3>Table presenting total coding DNA in <em>Salmonella</em> and
+<em>E-coli</em></h3>
 <pre class="r"><code>CodingDNA &lt;- as.table(rbind(c(sum(salmonella_length),sum(e_coli_length))))
 colnames(CodingDNA) &lt;- c(&quot;Salmonella&quot;,&quot;E-coli&quot;)
 rownames(CodingDNA) &lt;- &quot;Total Coding DNA&quot;
@@ -1449,9 +1445,25 @@ CodingDNA</code></pre>
 <pre><code>##                  Salmonella  E-coli
 ## Total Coding DNA    4294851 3978528</code></pre>
 <p>The table shown above displays the amount of Coding DNA in total in
-both Salmonella and E.coli, we can see a difference in total amount of
-DNA between Salmonella and E.coli, with Salmonella having 4294851 coding
-DNA base pairs and E.coli having 3978528 coding DNA base pairs.</p>
+both <em>Salmonella</em> and <em>E.coli</em>, we can see a difference in
+total amount of DNA between <em>Salmonella</em> and <em>E.coli</em>,
+with <em>Salmonella</em> having 4294851 coding DNA base pairs and
+<em>E.coli</em> having 3978528 coding DNA base pairs.</p>
+</div>
+<div id="length-of-all-coding-sequences-in-e.coli" class="section level3">
+<h3>Length of all coding sequences in <em>E.coli</em></h3>
+</div>
+<div id="length-of-all-coding-sequences-in-salmonella" class="section level3">
+<h3>Length of all coding sequences in <em>Salmonella</em></h3>
+</div>
+<div id="boxplot-of-coding-sequence-length" class="section level3">
+<h3>Boxplot of coding sequence length</h3>
+</div>
+<div id="mean-and-median-coding-sequence-length-of-e.coli" class="section level3">
+<h3>Mean and Median coding sequence length of <em>E.coli</em></h3>
+</div>
+<div id="mean-and-median-coding-sequence-length-of-salmonella" class="section level3">
+<h3>Mean and Median coding sequence length of <em>Salmonella</em></h3>
 </div>
 <div id="session-info" class="section level3">
 <h3>Session Info</h3>

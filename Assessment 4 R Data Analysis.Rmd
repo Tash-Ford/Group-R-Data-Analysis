@@ -26,7 +26,7 @@ The file “gene_expression.tsv” contains RNA-seq count data for three samples
 
 ```{r Read in File}
 install.packages("readr")
-library(readr)
+library("readr")
 Gene_Expression <- read.table("https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv",stringsAsFactors = FALSE, header=TRUE, row.names=1)
 
 head(Gene_Expression)
@@ -61,6 +61,7 @@ hist(Gene_Expression$Mean_value,breaks=1000, xlim = c(0,60000), xlab = "Mean Val
 ```
 The Histogram shown in the above figure displays the mean values of the gene expression data.The histogram was created with the hist() command, which produces a histogram plot.
 
+
 ### Importing growth data csv file into R
 ```{r}
 growth_data_URL <- "https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/growth_data.csv"
@@ -94,6 +95,7 @@ SD_growth_northeast_2005
 ```
 To determine the mean of 5.292 cm and standard deviation of 0.914 cm at the northeast site at 2005, the complete growth data was subsetted into northeast 2005 and mean() and SD() commands were used. 
 
+
 #### Mean and standard deviation of northeast site at 2020
 ```{r}
 growth_northeast_2020 <- subset(growth_data, Site == "northeast", select = c("Circumf_2020_cm"))
@@ -106,6 +108,7 @@ SD_growth_northeast_2020 <- sd(growth_northeast_2020$Circumf_2020_cm)
 SD_growth_northeast_2020
 ```
 To determine the mean of 54.228 cm and standard deviation of 25.22795 cm at the northeast site at 2020, the complete growth data was subsetted into northeast 2020 and mean() and SD() commands were used.
+
 
 #### Mean and standard deviation of southwest site at 2005
 ```{r}
@@ -120,6 +123,7 @@ SD_growth_southwest_2005
 ```
 To determine the mean of 4.862 cm and standard deviation of 1.147471 cm at the southwest site at 2005, the complete growth data was subsetted into southwest 2005 and mean() and SD() commands were used.
 
+
 #### Mean and standard deviation of southwest site at 2020
 ```{r}
 
@@ -133,6 +137,7 @@ SD_growth_southwest_2020 <- sd(growth_southwest_2020$Circumf_2020_cm)
 SD_growth_southwest_2020
 ```
 To determine the mean of 45.596 cm and standard deviation of 17.87345 cm at the southwest site at 2020, the complete growth data was subsetted into southwest 2020 and mean() and SD() commands were used.
+
 
 ### Table summary of mean and standard deviation 
 ```{r}
@@ -153,9 +158,10 @@ To provide the table above, a data frame was created with the mean and standard 
 
 
 
-# Part 2
+# **Part 2**
 
-### installing packages 
+
+### Installing packages 
 ```{r}
 install.packages("seqinr")
 library("seqinr")
@@ -164,7 +170,7 @@ library("R.utils")
 ```
 
 
-### Downloading Coding DNA of Salmonella 
+### Downloading Coding DNA of *Salmonella*
 
 ```{r}
 salmonella_URL <- "https://ftp.ensemblgenomes.ebi.ac.uk/pub/bacteria/release-59/fasta/bacteria_50_collection/salmonella_enterica_subsp_enterica_serovar_weltevreden_gca_005518735/cds/Salmonella_enterica_subsp_enterica_serovar_weltevreden_gca_005518735.ASM551873v1.cds.all.fa.gz"
@@ -177,9 +183,10 @@ head(salmonella)
 length(salmonella)
 
 ```
-To download the Salmonella enterica subsp. enterica serovar Weltevreden (GCA_005518735), (Salmonella) file, the download.file command was used, along with the gunzip command to remove the zip format from the FASTA file.
+To download the *Salmonella enterica* subsp. enterica serovar Weltevreden (GCA_005518735), (*Salmonella*) file, the download.file command was used, along with the gunzip command to remove the zip format from the FASTA file.
 
-### Downloading Coding DNA of E.coli
+
+### Downloading Coding DNA of *E.coli*
 
 ```{r}
 ecoli_URL <- "http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz"
@@ -193,9 +200,10 @@ head(e_coli)
 
 length(e_coli)
 ```
-To download the Escherichia coli str. K-12 substr. MG1655 str. K12 (GCA_000005845) (E.coli) file, the download.file command was used, along with the gunzip command to remove the zip format from the FASTA file.
+To download the *Escherichia coli* str. K-12 substr. MG1655 str. K12 (GCA_000005845) (*E.coli*) file, the download.file command was used, along with the gunzip command to remove the zip format from the FASTA file.
 
-### Table displaying Coding DNA sequence legnth of Salmonella and E-coli
+
+### Table displaying Coding DNA sequence legnth of *Salmonella* and *E-coli*
 
 ```{r}
 Salmonella_E.coli <- as.table(rbind(c(length(salmonella),length(e_coli))))
@@ -204,10 +212,10 @@ rownames(Salmonella_E.coli) <- "Coding DNA sequences"
 Salmonella_E.coli
 ```
 
-The table shown above displays the amount of Coding DNA sequences, we can see a difference in length between Salmonella and E.coli, with Salmonella having 4585 coding DNA sequences and E.coli having 4239 coding DNA sequences.
+The table shown above displays the amount of Coding DNA sequences, we can see a difference in length between *Salmonella* and *E.coli*, with *Salmonella* having 4585 coding DNA sequences and *E.coli* having 4239 coding DNA sequences.
 
 
-### Coding DNA in Salmonella and E-coli
+### Coding DNA in *Salmonella* and *E-coli*
 ```{r}
 salmonella_length <-as.numeric(summary(salmonella)[,1])
 
@@ -217,7 +225,9 @@ e_coli_length <- as.numeric(summary(e_coli)[,1])
 
 sum(e_coli_length)
 ```
-### Table presenting total coding DNA in Salmonella and E-coli
+
+
+### Table presenting total coding DNA in *Salmonella* and *E-coli*
 
 ```{r}
 CodingDNA <- as.table(rbind(c(sum(salmonella_length),sum(e_coli_length))))
@@ -226,10 +236,26 @@ rownames(CodingDNA) <- "Total Coding DNA"
 CodingDNA
 ```
 
-The table shown above displays the amount of Coding DNA in total in both Salmonella and E.coli, we can see a difference in total amount of DNA between Salmonella and E.coli, with Salmonella having 4294851  coding DNA base pairs and E.coli having 3978528 coding DNA base pairs.
+The table shown above displays the amount of Coding DNA in total in both *Salmonella* and *E.coli*, we can see a difference in total amount of DNA between *Salmonella* and *E.coli*, with *Salmonella* having 4294851  coding DNA base pairs and *E.coli* having 3978528 coding DNA base pairs.
+
+
+### Length of all coding sequences in *E.coli*
 
 
 
+### Length of all coding sequences in *Salmonella*
+
+
+
+### Boxplot of coding sequence length
+
+
+
+### Mean and Median coding sequence length of *E.coli*
+
+
+
+### Mean and Median coding sequence length of *Salmonella*
 
 
 
