@@ -8,21 +8,21 @@ fig_width: 10
 
 # **Part 1**
 
-
-## Download Data files
-
-```{r Download Data}
-
-URL2="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv"
-download.file(URL2,destfile="Gene_Expression.csv")
-```
-
-
 ## Gene Expression Data
 The file “gene_expression.tsv” contains RNA-seq count data for three samples of interest.
 
 
-### Read in the file, making the gene identifiers the row names. Show a table of values for the first six genes.
+### Download Data files
+
+```{r Download Data}
+
+URL_P1="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv"
+download.file(URL_P1,destfile="Gene_Expression.csv")
+```
+Gene expression file was downloaded using the download.file command
+
+
+### File read in as table.
 
 ```{r Read in File}
 install.packages("readr")
@@ -31,28 +31,34 @@ Gene_Expression <- read.table("https://raw.githubusercontent.com/ghazkha/Assessm
 
 head(Gene_Expression)
 ```
+Required package, "readr" installed and loaded using install.packages and library() command. Data read in as table with the read.table command, the row.names=1 argument creates rows with the gene identifiers as the names . The head() function displays the first 6 lines of the table. 
 
 
-### Make a new column which is the mean of the other columns. Show a table of values for the first six genes.
+### Mean data added to table as new column
 ```{r Calculating Mean values}
 Gene_Expression$Mean_value <- rowMeans(Gene_Expression, na.rm = TRUE)
 head(Gene_Expression)
 ```
+rowMeans is used to calculate the mean value of each row in the data file, those values are then subset using Gene_Expression$Mean_value <- into the file. The head() function displays the first 6 lines of the table.
 
 
-### List the 10 genes with the highest mean expression
+### 10 genes with the highest mean expression
 ```{r 10 genes with the highest mean expression}
 Sorted_Genes <- Gene_Expression[order(-Gene_Expression$Mean_value), ]
 Top10_Mean <- head(Sorted_Genes, 10)
 print(Top10_Mean)
 ```
+The order function sorts the data based on the mean values, the - argument must be used to sort in descending order. head(sorted) subsets the top 10 rows into Top10_Mean which can be displayed using print().
 
-### Determine the number of genes with a mean <10
+
+### Number of genes with a mean <10
 ```{r Number of genes with mean less than 10}
 
 Low_Mean <- subset(Gene_Expression, Mean_value < 10)
 nrow(Low_Mean)
 ```
+Subset taken of gene expression data with a mean value of less than 10. The rows in the resulting data are counted to get the amount of genes with a mean under 10.
+
 
 ### Histogram of Mean Values
 ```{r}
@@ -239,23 +245,142 @@ CodingDNA
 The table shown above displays the amount of Coding DNA in total in both *Salmonella* and *E.coli*, we can see a difference in total amount of DNA between *Salmonella* and *E.coli*, with *Salmonella* having 4294851  coding DNA base pairs and *E.coli* having 3978528 coding DNA base pairs.
 
 
-### Length of all coding sequences in *E.coli*
-
-
-
 ### Length of all coding sequences in *Salmonella*
 
+```{r}
+print(salmonella_length)
+```
+
+### Length of all coding sequences in *E.coli*
+
+```{r}
+print(e_coli_length)
+```
 
 
 ### Boxplot of coding sequence length
 
-
-
-### Mean and Median coding sequence length of *E.coli*
+```{r}
+boxplot(salmonella_length, e_coli_length,
+        ylab="Sequence Length",
+        main="Coding Sequence Length",
+        names = c("Salmonella","E.coli"))
+```
 
 
 
 ### Mean and Median coding sequence length of *Salmonella*
+
+```{r Salmonella mean length}
+mean(salmonella_length)
+```
+
+```{r}
+median(salmonella_length)
+```
+
+
+### Mean and Median coding sequence length of *E.coli*
+
+```{r}
+mean(e_coli_length)
+```
+
+
+```{r E.coli mean length}
+median(e_coli_length)
+```
+
+
+### Frequency of DNA bases
+
+```{r Frequency of DNA bases in Salmonella}
+salmonella_DNA <- unlist(salmonella)
+salmonella_DNA_comp <- count(salmonella_DNA,1)
+salmonella_DNA_prop <- salmonella_DNA_comp/sum(salmonella_DNA_comp)
+```
+```{r Frequency of DNA bases in E.coli}
+e_coli_DNA <- unlist(e_coli)
+e_coli_DNA_comp <- count(e_coli_DNA,1)
+e_coli_DNA_prop <- e_coli_DNA_comp/sum(e_coli_DNA_comp)
+```
+
+
+### Bar plot for *Salmonella* nucleotide frequency
+
+```{r}
+barplot(salmonella_DNA_prop,xlab="nucleotides",ylab="frequency", main="Salmonella nucleotide frequency")
+```
+
+### Bar plot for *E.coli* nucleotide frequency
+
+```{r}
+barplot(e_coli_DNA_prop,xlab="nucleotides",ylab="frequency", main="E coli nucleotide frequency")
+```
+
+
+### *Salmonella* Protein sequence frequency
+
+```{r}
+salmonella_prot <- lapply(salmonella, translate)
+
+
+salmonella_aa <- unique(salmonella_prot[[2]])
+salmonella_aa <- salmonella_aa[salmonella_aa != "*"]
+
+salmonella_aa_len <- length(salmonella_aa)
+
+salmonella_aa_count <- lapply(salmonella_prot, function(sequence) {
+  count(sequence, wordsize = 1, alphabet = salmonella_aa)
+})
+
+salmonella_aa_table <- do.call(rbind, salmonella_aa_count)
+
+salmonella_aa_totals <- colSums(salmonella_aa_table)
+
+salmonella_aa_prop <- salmonella_aa_totals/sum(salmonella_aa_totals)
+
+salmonella_aa_prop
+```
+
+
+### *E.coli* Protein sequence frequency
+
+```{r}
+e_coli_prot <- lapply(e_coli, translate)
+
+
+e_coli_aa <- unique(e_coli_prot[[2]])
+e_coli_aa <- e_coli_aa[e_coli_aa != "*"]
+
+e_coli_aa_len <- length(e_coli_aa)
+
+e_coli_aa_count <- lapply(e_coli_prot, function(sequence) {
+  count(sequence, wordsize = 1, alphabet = e_coli_aa)
+})
+
+e_coli_aa_table <- do.call(rbind, e_coli_aa_count)
+
+e_coli_aa_totals <- colSums(e_coli_aa_table)
+
+e_coli_aa_prop <- e_coli_aa_totals/sum(e_coli_aa_totals)
+
+e_coli_aa_prop
+```
+
+
+### Bar plot for *E.coli* amino acid frequency
+
+```{r}
+barplot(e_coli_aa_prop,xlab="Amino Acids",ylab="Frequency", main="E coli Amino Acid Frequency")
+```
+
+### Bar plot for *Salmonella* amino acid frequency
+
+```{r}
+barplot(salmonella_aa_prop,xlab="Amino Acids",ylab="Frequency", main="Salmonella Amino Acid Frequency")
+
+```
 
 
 
