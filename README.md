@@ -96,3 +96,53 @@ o	The sum(e_coli_length) command ,sums the e_coli_length value, which provides t
 ### Question 5
 
 ### Question 6
+-	The lapply() command used with the translate command, translated the salmonella nucleotide sequence into a protein sequence. The unlist command converts the protein sequence into a single character vector.
+-	Using unique() command with a salmonella_prot sequence 2, and then the specific symbols[!= “*”], allows the character vectors present in salmonella_prot 2 to be turned into amino acid letter representatives, excluding the symbol of *, which is the alphabet of the amino acids represented by aa.
+
+-	To find the 3 length K-mers in Salmonella, the count () command was used, with the command word size=3, and using the alphabet of aa. The data was then turned into a data frame for easier access of the data.
+o	To find the overrepresented 3 length K-mers of salmonella, the arrange() command was used, with a negative(-
+) frequency command to ensure the data would be represented in decreasing order.
+The head() command was used with a maximum of 10, to show the 10 most overrepresented 3 length K-mers.
+o	To find the underrepresented 3 length K-mers of salmonella, the arrange() command was used, with a frequency command to ensure the data would be represented in increasing order.
+The head() command was used with a maximum of 10, to show the 10 most underrepresented 3 length K-mers.
+-	To find the 4 length K-mers in Salmonella, the count () command was used, with the command word size=4, and using the alphabet of aa. The data was then turned into a data frame for easier access of the data.
+o	To find the overrepresented 4 length K-mers of salmonella, the arrange() command was used, with a -frequency command to ensure the data would be represented in decreasing order.
+The head() command was used with a maximum of 10, to show the 10 most overrepresented 4 length K-mers.
+o	To find the underrepresented 4 length K-mers of salmonella, the arrange() command was used, with a frequency command to ensure the data would be represented in increasing order.
+The head() command was used with a maximum of 10, to show the 10 most underrepresented 4 length K-mers.
+-	To find the 5 length K-mers in Salmonella, the count () command was used, with the command word size=5, and using the alphabet of aa. The data was then turned into a data frame for easier access of the data.
+o	To find the overrepresented 5 length K-mers of salmonella, the arrange() command was used, with a -frequency command to ensure the data would be represented in decreasing order.
+The head() command was used with a maximum of 10, to show the 10 most overrepresented 5 length K-mers.
+o	To find the underrepresented 5 length K-mers of salmonella, the arrange() command was used, with a frequency command to ensure the data would be represented in increasing order.
+The head() command was used with a maximum of 10, to show the 10 most underrepresented 5 length K-mers.
+
+-	The lapply() command used with the translate command, translated the E.coli nucleotide sequence into a protein sequence. The unlist command converts the protein sequence into a single character vector.
+-	To find the 3 length K-mers in E.coli the count () command was used, with the command word size=3, and using the alphabet of aa. The data was then turned into a data frame for easier access of the data.
+o	To find the overrepresented 3 length K-mers of E.coli, the arrange() command was used, with a -frequency command to ensure the data would be represented in decreasing order.
+The head() command was used with a maximum of 10, to show the 10 most overrepresented 3 length K-mers.
+o	To find the underrepresented 3 length K-mers of E.coli, the arrange() command was used, with a frequency command to ensure the data would be represented in increasing order.
+The head() command was used with a maximum of 10, to show the 10 most underrepresented 3 length K-mers.
+-	To find the 4 length K-mers in E.coli, the count () command was used, with the command word size=4, and using the alphabet of aa. The data was then turned into a data frame for easier access of the data.
+o	To find the overrepresented 4 length K-mers of E.coli, the arrange() command was used, with a -frequency command to ensure the data would be represented in decreasing order.
+The head() command was used with a maximum of 10, to show the 10 most overrepresented 4 length K-mers.
+o	To find the underrepresented 4 length K-mers of E.coli, the arrange() command was used, with a frequency command to ensure the data would be represented in increasing order.
+The head() command was used with a maximum of 10, to show the 10 most underrepresented 4 length K-mers.
+-	To find the 5 length K-mers in E.coli, the count () command was used, with the command word size=5, and using the alphabet of aa. The data was then turned into a data frame for easier access of the data.
+o	To find the overrepresented 5 length K-mers of E.coli, the arrange() command was used, with a -frequency command to ensure the data would be represented in decreasing order.
+The head() command was used with a maximum of 10, to show the 10 most overrepresented 5 length K-mers.
+o	To find the underrepresented 5 length K-mers of E.coli, the arrange() command was used, with a frequency command to ensure the data would be represented in increasing order.
+The head() command was used with a maximum of 10, to show the 10 most underrepresented 5 length K-mers.
+
+
+-	To plot the 3 length K-mers that are overrepresented in Salmonella and E.coli, new data frames were created, making the 3 length K-mers the row names for both salmonella and E.coli. This was done by using a [,-1] to remove the entire first column and then replace it with the 3 length K-mers names.
+-	To make the plot, the plot() command was used looking at both salmonella and E.coli’ 10 most overrepresented 3 length K-mers. The main= command was used to give a title, xlab, used to give a title to the x-axis, ylab was used to give label to y axix.
+o	The text command was used along with labels=row.names to label the frequency points on the graph, with the corresponding 3 length K-mer, cex command used to size the labels, the pos command to position the labels relative to the point, and the col command used to colour the labels, with E.coli as green and salmonella as red.
+ 
+-	To plot the 3 length K-mers that are underrepresented in Salmonella and E.coli, new data frames were created, making the 3 length K-mers the row names for both salmonella and E.coli. This was done by using a [,-1] to remove the entire first column and then replace it with the 3 length K-mers names.
+-	To make the plot, the plot() command was used looking at both salmonella and E.coli’ 10 most underrepresented 3 length K-mers. The main= command was used to give a title, xlab, used to give a title to the x-axis, ylab was used to give label to y axis.
+o	The text command was used along with labels=row.names to label the frequency points on the graph, with the corresponding 3 length K-mers, cex command was used to size the labels, the pos command to position the labels relative to the point, and the col command used to colour the labels, with E.coli as green and salmonella as red.
+ 
+
+
+
+
