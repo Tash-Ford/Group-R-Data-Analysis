@@ -21,14 +21,15 @@ download.file(URL_P1,destfile="Gene_Expression.csv")
 ```
 Gene expression file was downloaded using the download.file command
 
-```{r include=FALSE}
-
+```{r Install and load packages}
+install.packages("dplyr")
 library("dplyr")
 library("seqinr")
 library("R.utils")
 install.packages("readr")
 library("readr")
 ```
+
 
 ### File read in as table.
 
@@ -59,7 +60,6 @@ The order function sorts the data based on the mean values, the - argument must 
 
 ### Number of genes with a mean <10
 ```{r Number of genes with mean less than 10}
-
 Low_Mean <- subset(Gene_Expression, Mean_value < 10)
 nrow(Low_Mean)
 ```
@@ -67,15 +67,19 @@ Subset taken of gene expression data with a mean value of less than 10. The rows
 
 
 ### Histogram of Mean Values
-```{r}
+```{r Histogram of mean gene expression values }
 hist(Gene_Expression$Mean_value,breaks=1000, xlim = c(0,60000), xlab = "Mean Value of Gene Expression",main="Histogram of Mean values of Gene Expression")
 
 ```
 The Histogram shown in the above figure displays the mean values of the gene expression data.The histogram was created with the hist() command, which produces a histogram plot.
 
 
+## Growth Data
+The file “growth_data.csv” contains tree circumferenve measurements for trees growing at both a control site and a treatment site. The trees were planted 20 years ago.
+
+
 ### Importing growth data csv file into R
-```{r}
+```{r Import Growth Data file}
 growth_data_URL <- "https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/growth_data.csv"
 download.file(growth_data_URL,destfile="growth_data")
 
@@ -86,7 +90,7 @@ The growth data csv file was converted into a R object, via the download.file co
 
 
 ### Column names of Growth Data 
-```{r}
+```{r Column names of growth data}
 colnames(growth_data)
 ```
 To determine the column names of the growth data file, the command colnames was used, and the column names of "Site","TreeID", "Circumf_2005_cm", "Circumf_2010_cm", "Circumf_2015_cm"and "Circumf_2020_cm" can be seen in the output above.
@@ -179,6 +183,8 @@ install.packages("R.utils")
 library("R.utils")
 ```
 
+## **Q1**
+
 ### Downloading Coding DNA of *Salmonella*
 ```{r}
 salmonella_URL <- "https://ftp.ensemblgenomes.ebi.ac.uk/pub/bacteria/release-59/fasta/bacteria_50_collection/salmonella_enterica_subsp_enterica_serovar_weltevreden_gca_005518735/cds/Salmonella_enterica_subsp_enterica_serovar_weltevreden_gca_005518735.ASM551873v1.cds.all.fa.gz"
@@ -214,6 +220,8 @@ Salmonella_E.coli
 The table shown above displays the amount of Coding DNA sequences, we can see a difference in length between *Salmonella* and *E.coli*, with *Salmonella* having 4585 coding DNA sequences and *E.coli* having 4239 coding DNA sequences.
 
 
+## **Q2**
+
 ### Coding DNA in *Salmonella* and *E-coli*
 ```{r}
 salmonella_length <-as.numeric(summary(salmonella)[,1])
@@ -238,52 +246,67 @@ CodingDNA
 The table shown above displays the amount of Coding DNA in total in both *Salmonella* and *E.coli*, we can see a difference in total amount of DNA between *Salmonella* and *E.coli*, with *Salmonella* having 4294851  coding DNA base pairs and *E.coli* having 3978528 coding DNA base pairs.
 
 
+## **Q3**
+
 ### Length of all coding sequences in *Salmonella*
 
 ```{r}
-print(salmonella_length)
+salmonella_csl <- sapply(salmonella, length)
+head(salmonella_csl,25)
 ```
+sapply works as a loop function when calculating the length of each sequence in the *Salmonella* data. the head() function is utilised to show the first 25 sequences lengths in an effort to minimise the size of the rmd file. print can be used in it's place for a more complete view.
 
 ### Length of all coding sequences in *E.coli*
 
 ```{r}
-print(e_coli_length)
+e_coli_csl <- sapply(e_coli, length)
+head(e_coli_csl,25)
 ```
+sapply works as a loop function when calculating the length of each sequence in the *E.coli* data. the head() function is utilised to show the first 25 sequences lengths in an effort to minimise the size of the rmd file. print can be used in it's place for a more complete view.
 
 
 ### Boxplot of coding sequence length
 
 ```{r}
-boxplot(salmonella_length, e_coli_length,
+boxplot(salmonella_csl, e_coli_csl,
         ylab="Sequence Length",
         main="Coding Sequence Length",
         names = c("Salmonella","E.coli"))
 ```
-
+The boxplot() function creates a boxplot of both the *Salmonella* and the *E.coli* data. The heading of the plot is changed with the 'main' argument, the y axis label with 'ylab' and the names of each individual plot with the 'names' argument.
 
 
 ### Mean and Median coding sequence length of *Salmonella*
 
-```{r Salmonella mean length}
-mean(salmonella_length)
+```{r *Salmonella* mean length}
+mean(salmonella_csl)
 ```
+The median() command calculates the average value, in this case the length, of every sequence.
 
-```{r}
-median(salmonella_length)
+
+```{r *Salmonella* median length}
+median(salmonella_csl)
 ```
+The median() command calculates the middle value of all the sequences.
 
 
 ### Mean and Median coding sequence length of *E.coli*
 
-```{r}
-mean(e_coli_length)
+```{r *E.coli* mean length}
+mean(e_coli_csl)
 ```
+The mean() command calculates the average value, in this case the length, of every sequence.
 
 
-```{r E.coli mean length}
-median(e_coli_length)
+```{r *E.coli* median length}
+median(e_coli_csl)
 ```
+The median() command calculates the middle value of all the sequences.
 
+Both organisms are quite similar with sequence lengths. *Salmonella* has a slightly lower mean value (4bp difference) and an even lower median value (27bp difference). This indicates that while on average, the two organisms have similar length sequences, however *Salmonella* has a higher frequency of longer sequences. These differences can indicate different genetic expression and functionality.  
+
+
+## **Q4**
 
 ### Frequency of DNA bases
 
@@ -291,25 +314,32 @@ median(e_coli_length)
 salmonella_DNA <- unlist(salmonella)
 salmonella_DNA_comp <- count(salmonella_DNA,1)
 salmonella_DNA_prop <- salmonella_DNA_comp/sum(salmonella_DNA_comp)
+salmonella_DNA_prop
 ```
+
 ```{r Frequency of DNA bases in E.coli}
 e_coli_DNA <- unlist(e_coli)
 e_coli_DNA_comp <- count(e_coli_DNA,1)
 e_coli_DNA_prop <- e_coli_DNA_comp/sum(e_coli_DNA_comp)
+e_coli_DNA_prop
 ```
+The unlist() command converts the list data into a vector amking it easier for analysis. count() is used to calculate the amount of each nucleotide in each sequence, <- stores the results in the _comp values. Dividing the _comp data by the sum of itself determines the frequency as a percentage  in decimal form.
 
 
 ### Bar plot for *Salmonella* nucleotide frequency
 
 ```{r}
-barplot(salmonella_DNA_prop,xlab="nucleotides",ylab="frequency", main="Salmonella nucleotide frequency")
+barplot(salmonella_DNA_prop,xlab="Nucleotides",ylab="Frequency", main="Salmonella nucleotide frequency")
 ```
+The frequency of nucleotides is displayed as a barplot with the barplot() command. The plot heading is determined with "main", the x and y axis labels are determined using "xlab" and "ylab" respectively.
+
 
 ### Bar plot for *E.coli* nucleotide frequency
 
 ```{r}
-barplot(e_coli_DNA_prop,xlab="nucleotides",ylab="frequency", main="E coli nucleotide frequency")
+barplot(e_coli_DNA_prop,xlab="Nucleotides",ylab="Frequency", main="E coli nucleotide frequency")
 ```
+The frequency of nucleotides is displayed as a barplot with the barplot() command. The plot heading is determined with "main", the x and y axis labels are determined using "xlab" and "ylab" respectively.
 
 
 ### *Salmonella* Protein sequence frequency
@@ -335,6 +365,7 @@ salmonella_aa_prop <- salmonella_aa_totals/sum(salmonella_aa_totals)
 
 salmonella_aa_prop
 ```
+To translate all sequences in the data to proteins sequences, the lapply() command is applied. To define the amino acid alphabet, unique() extracts unique amino acids while salmonella_aa[salmonella_aa != "*"] removes any unknown amino acids. This is then used as a reference when using lapply(x,count()) to calculate the amount of each amino acid in the sequences. do.call(rbind,x) is usually for combining more complex amounts of data into 1 data frame, however it is still effective here. colSums calculates the total of each column, in this case, it add the amount of each amino acid across the sequences. The proportion of each total is calculated by dividing each total by the overall total. The results are then displayed.
 
 ### *E.coli* Protein sequence frequency
 ```{r}
@@ -358,6 +389,7 @@ e_coli_aa_prop <- e_coli_aa_totals/sum(e_coli_aa_totals)
 
 e_coli_aa_prop
 ```
+To translate all sequences in the data to proteins sequences, the lapply() command is applied. To define the amino acid alphabet, unique() extracts unique amino acids while salmonella_aa[salmonella_aa != "*"] removes any unknown amino acids. This is then used as a reference when using lapply(x,count()) to calculate the amount of each amino acid in the sequences. do.call(rbind,x) is usually for combining more complex amounts of data into 1 data frame, however it is still effective here. colSums calculates the total of each column, in this case, it add the amount of each amino acid across the sequences. The proportion of each total is calculated by dividing each total by the overall total. The results are then displayed.
 
 
 ### Bar plot for *E.coli* amino acid frequency
@@ -365,6 +397,8 @@ e_coli_aa_prop
 ```{r}
 barplot(e_coli_aa_prop,xlab="Amino Acids",ylab="Frequency", main="E coli Amino Acid Frequency")
 ```
+The frequency of each protein is displayed as a barplot with the barplot() command. The plot heading is determined with "main", the x and y axis labels are determined using "xlab" and "ylab" respectively.
+
 
 ### Bar plot for *Salmonella* amino acid frequency
 
@@ -372,12 +406,33 @@ barplot(e_coli_aa_prop,xlab="Amino Acids",ylab="Frequency", main="E coli Amino A
 barplot(salmonella_aa_prop,xlab="Amino Acids",ylab="Frequency", main="Salmonella Amino Acid Frequency")
 
 ```
+The frequency of each protein is displayed as a barplot with the barplot() command. The plot heading is determined with "main", the x and y axis labels are determined using "xlab" and "ylab" respectively.
 
+Nucleotide frequency and their distributions, as shown in the barplots, are quite similar between the 2 organisms indicating functional similarities. 
+
+```{r}
+combined_aa_data <- rbind(salmonella_aa_prop, e_coli_aa_prop)
+barplot(combined_aa_data, 
+        beside = TRUE, 
+        xlab = "Amino Acids", 
+        ylab = "Frequency", 
+        main = "Amino Acid Frequency Comparison", 
+        col = c("skyblue", "lightgreen"),
+        legend.text = c("Salmonella", "E. coli"),
+        args.legend = list(x = "topright", bty = "n", inset=c(-0.05, -0.2)))
+```
+To better visualise differences in amino acid frequencies, both sets of data were combined with rbind. The resulting data was plotted using barplot(). Plot labels designated with xlab, ylab and main. Columns were coloured with col=c() and a legend added. To ensure the legend was not covering important data, args.legend = list(x = "topright", bty = "n", inset=c(-0.05, -0.2)) was used to place the legend at the top right away from data.
+
+
+
+
+## **Q5**
 part 2 - question 5 will go here!!!
 
 
+## **Q6**
 
-### Creating amino acid alphabet and unlisting Salmonella proteins
+### Creating amino acid alphabet and unlisting *Salmonella* proteins
 ```{r}
 salmonella_prot <- lapply(salmonella, translate)
 salmonella_prots <- unlist(salmonella_prot)
@@ -396,7 +451,7 @@ head(salmonella_counts_3)
 df_salmonella_counts_3 <- as.data.frame(salmonella_counts_3)
 head(df_salmonella_counts_3)
 ```
-A data frame of 3 length K-mers was created for salmonella to be able to be able to sort over represented and underrepresented 3 length k-mers.The data frame was created with the as.data.frame() command.
+A data frame of 3 length K-mers was created for *Salmonella* to be able to be able to sort over represented and underrepresented 3 length k-mers.The data frame was created with the as.data.frame() command.
 
 ### Creating data frame of 3 length K-mers in E.coli
 ```{r}
@@ -410,7 +465,7 @@ head(e_coli_counts_3)
 df_e_coli_counts_3 <- as.data.frame(e_coli_counts_3)
 head(df_e_coli_counts_3)
 ```
-A data frame of 3 length K-mers was created for E.coli to be able to be able to sort over represented and underrepresented 3 length k-mers.The data frame was created with the as.data.frame() command.
+A data frame of 3 length K-mers was created for *E.coli* to be able to be able to sort over represented and underrepresented 3 length k-mers.The data frame was created with the as.data.frame() command.
 
 ### Top 10 most overrepressented 3 length K-mers in Salmonella
 ```{r}
@@ -422,7 +477,7 @@ head(over_salmonella_counts_3,10)
 over_e_coli_counts_3 <-arrange(df_e_coli_counts_3,-Freq)
 head(over_e_coli_counts_3,10)
 ```
-The 3 length K-mers overrepresented in Salmonella and E.coli, are all the same, and in the same order of overrepresentation, however they do vary on the amount of representation In the gene. The identification of the  overrepresented 3 length K-mers were found by using the arrange() command, with a - negative frequency, to order the data frame in decreasing order.
+The 3 length K-mers overrepresented in *Salmonella* and E.coli, are all the same, and in the same order of overrepresentation, however they do vary on the amount of representation In the gene. The identification of the  overrepresented 3 length K-mers were found by using the arrange() command, with a - negative frequency, to order the data frame in decreasing order.
 
 ### Top 10 most underrepressented 3 length K-mers in Salmonella
 ```{r}
@@ -434,7 +489,7 @@ head(under_salmonella_counts_3,10)
 under_e_coli_counts_3 <-arrange(df_e_coli_counts_3,Freq)
 head(under_e_coli_counts_3,10)
 ```
-The 3 length K-mers underrepresented in Salmonella and E.coli, share similar K-mers, with majority of the K-mers shown being in both organism, with a few exceptions of ‘FKW’ in Salmonella and ‘MWN’ in E.coli, the shared K-mers do vary on the amount of representation In the gene.The identification of the  underrepresented 3 length K-mers were found by using the arrange() command, with a + positive frequency, to order the data frame in increasing order.
+The 3 length K-mers underrepresented in *Salmonella* and E.coli, share similar K-mers, with majority of the K-mers shown being in both organism, with a few exceptions of ‘FKW’ in *Salmonella* and ‘MWN’ in E.coli, the shared K-mers do vary on the amount of representation In the gene.The identification of the  underrepresented 3 length K-mers were found by using the arrange() command, with a + positive frequency, to order the data frame in increasing order.
 
 
 ### Creating data frame of 4 length K-mers in Salmonella
@@ -446,7 +501,7 @@ head(salmonella_counts_4)
 df_salmonella_counts_4 <- as.data.frame(salmonella_counts_4)
 head(df_salmonella_counts_4)
 ```
-A data frame of 4 length K-mers was created for salmonella to be able to be able to sort over represented and underrepresented 4 length k-mers.The data frame was created with the as.data.frame() command.
+A data frame of 4 length K-mers was created for *Salmonella* to be able to be able to sort over represented and underrepresented 4 length k-mers.The data frame was created with the as.data.frame() command.
 
 ### Creating data frame of 4 length K-mers in E.coli
 ```{r}
@@ -455,7 +510,7 @@ head(e_coli_counts_4)
 df_e_coli_counts_4 <- as.data.frame(e_coli_counts_4)
 head(df_e_coli_counts_4)
 ```
-A data frame of 4 length K-mers was created for E.coli to be able to be able to sort over represented and underrepresented 4 length k-mers.The data frame was created with the as.data.frame() command.
+A data frame of 4 length K-mers was created for *E.coli* to be able to be able to sort over represented and underrepresented 4 length k-mers.The data frame was created with the as.data.frame() command.
 
 ### Top 10 most overrepressented 4 length K-mers in Salmonella
 ```{r}
@@ -467,7 +522,7 @@ head(over_salmonella_counts_4,10)
 over_e_coli_counts_4 <-arrange(df_e_coli_counts_4,-Freq)
 head(over_e_coli_counts_4,10)
 ```
-The 4 length K-mers overrepresented in Salmonella and E.coli, share similar K-mers, with majority of the K-mers shown being in both organisms, with a few exceptions of ‘ALAL’ in Salmonella and ‘LLLA’ in E.coli, the shared K-mers do vary on the amount of representation In the gene.The identification of the  over represented 4 length K-mers were found by using the arrange() command, with a - negative frequency, to order the data frame in decreasing order.
+The 4 length K-mers overrepresented in *Salmonella* and E.coli, share similar K-mers, with majority of the K-mers shown being in both organisms, with a few exceptions of ‘ALAL’ in *Salmonella* and ‘LLLA’ in E.coli, the shared K-mers do vary on the amount of representation In the gene.The identification of the  over represented 4 length K-mers were found by using the arrange() command, with a - negative frequency, to order the data frame in decreasing order.
 
 ### Top 10 most underrepressented 4 length K-mers in Salmonella
 ```{r}
@@ -479,7 +534,7 @@ head(under_salmonella_counts_4,10)
 under_e_coli_counts_4 <-arrange(df_e_coli_counts_4,Freq)
 head(under_e_coli_counts_4,10)
 ```
-The 4 length K-mers underrepresented in Salmonella and E.coli, all show 0 representation, as there is just 10 K-mers shown, there are other K-mers also at 0 representation, so while there are limited shared K-mers between both organisms shown in the results, more shared K-mers of underrepresentation cannot be ruled out.The identification of the  underrepresented 4 length K-mers were found by using the arrange() command, with a + positive frequency, to order the data frame in increasing order.
+The 4 length K-mers underrepresented in *Salmonella* and E.coli, all show 0 representation, as there is just 10 K-mers shown, there are other K-mers also at 0 representation, so while there are limited shared K-mers between both organisms shown in the results, more shared K-mers of underrepresentation cannot be ruled out.The identification of the  underrepresented 4 length K-mers were found by using the arrange() command, with a + positive frequency, to order the data frame in increasing order.
 
 ### Creating data frame of 5 length K-mers in Salmonella
 ```{r}
@@ -489,7 +544,7 @@ head(salmonella_counts_5)
 df_salmonella_counts_5 <- as.data.frame(salmonella_counts_5)
 head(df_salmonella_counts_5)
 ```
-A data frame of 5 length K-mers was created for Salmonella to be able to be able to sort over represented and underrepresented 5 length k-mers.The data frame was created with the as.data.frame() command.
+A data frame of 5 length K-mers was created for *Salmonella* to be able to be able to sort over represented and underrepresented 5 length k-mers.The data frame was created with the as.data.frame() command.
 
 ### Creating data frame of 5 length K-mers in E.coli
 ```{r}
@@ -498,7 +553,7 @@ head(e_coli_counts_5)
 df_e_coli_counts_5 <- as.data.frame(e_coli_counts_5)
 head(df_e_coli_counts_5)
 ```
-A data frame of 5 length K-mers was created for E.coli to be able to be able to sort over represented and underrepresented 5 length k-mers.The data frame was created with the as.data.frame() command.
+A data frame of 5 length K-mers was created for *E.coli* to be able to be able to sort over represented and underrepresented 5 length k-mers.The data frame was created with the as.data.frame() command.
 
 ### Top 10 most overrepressented 5 length K-mers in Salmonella
 ```{r}
@@ -510,7 +565,7 @@ head(over_salmonella_counts_5,10)
 over_e_coli_counts_5 <-arrange(df_e_coli_counts_5,-Freq)
 head(over_e_coli_counts_5,10)
 ```
-The 5 length K-mers overrepresented in Salmonella and E.coli, some similar K-mers, with approximately half being shown in both organisms, with the exceptions of “AAAAA”, “AALLA”, “ALAAL”, “ALALA” in Salmonella and “SGSGK”, “LLLDE”, “LLLLL”, “LDEPT” in E.coli, the shared K-mers do vary on the amount of representation In the gene.The identification of the  overrepresented 5 length K-mers were found by using the arrange() command, with a - negative frequency, to order the data frame in decreasing order.
+The 5 length K-mers overrepresented in *Salmonella* and E.coli, some similar K-mers, with approximately half being shown in both organisms, with the exceptions of “AAAAA”, “AALLA”, “ALAAL”, “ALALA” in *Salmonella* and “SGSGK”, “LLLDE”, “LLLLL”, “LDEPT” in E.coli, the shared K-mers do vary on the amount of representation In the gene.The identification of the  overrepresented 5 length K-mers were found by using the arrange() command, with a - negative frequency, to order the data frame in decreasing order.
 
 ### Top 10 most underrepressented 5 length K-mers in Salmonella
 ```{r}
@@ -522,9 +577,9 @@ head(under_salmonella_counts_5,10)
 under_e_coli_counts_5 <-arrange(df_e_coli_counts_5,Freq)
 head(under_e_coli_counts_5,10)
 ```
-The 5 length K-mers underrepresented in Salmonella and E.coli, all show 0 representation, as there is just 10 K-mers shown, there are other K-mers also at 0 representation, so while there are limited shared K-mers between both organisms shown in the results, more shared K-mers of underrepresentation cannot be ruled out.The identification of the  underrepresented 5 length K-mers were found by using the arrange() command, with a + positive frequency, to order the data frame in increasing order.
+The 5 length K-mers underrepresented in *Salmonella* and E.coli, all show 0 representation, as there is just 10 K-mers shown, there are other K-mers also at 0 representation, so while there are limited shared K-mers between both organisms shown in the results, more shared K-mers of underrepresentation cannot be ruled out.The identification of the  underrepresented 5 length K-mers were found by using the arrange() command, with a + positive frequency, to order the data frame in increasing order.
 
-### Plot of K-mers of 3 amino acids overrepresented of Salmonella compared to E.coli
+### Plot of K-mers of 3 amino acids overrepresented of *Salmonella* compared to E.coli
 ```{r}
 ecoli_3_over <- data.frame(over_e_coli_counts_3[,-1], row.names=over_e_coli_counts_3[,1])
 salmonella_3_over <- data.frame(over_salmonella_counts_3[,-1], row.names=over_salmonella_counts_3[,1])
@@ -542,9 +597,9 @@ text(head(over_salmonella_counts_3,10),
      cex = 0.6, pos = 3, col = "green")
 ```
 
-The plot above shows the overrepresented 3 Amino acid length K-mers in both Salmonella (Green) and E.coli (red). The plot shows the labelled K-mers and their corresponding frequency, and the closeness in shared K-mers between both organisms, but also shows the variation in frequency between the K-mers when expressed in Salmonella compared to E.coli.
+The plot above shows the overrepresented 3 Amino acid length K-mers in both *Salmonella* (Green) and *E.coli* (red). The plot shows the labelled K-mers and their corresponding frequency, and the closeness in shared K-mers between both organisms, but also shows the variation in frequency between the K-mers when expressed in *Salmonella* compared to E.coli.
 
-### Plot of K-mers of 3 amino acids underrepresented in Salmonella compared to E.coli
+### Plot of K-mers of 3 amino acids underrepresented in *Salmonella* compared to E.coli
 ```{r}
 ecoli_3_under <- data.frame(under_e_coli_counts_3[,-1], row.names=under_e_coli_counts_3[,1])
 salmonella_3_under <- data.frame(under_salmonella_counts_3[,-1], row.names=under_salmonella_counts_3[,1])
@@ -562,9 +617,9 @@ text(head(under_salmonella_counts_3,10),
      cex = 0.6, pos = 3, col = "green")
 ```
 
-The plot above shows the underrepresented 3 Amino acid length K-mers in both Salmonella (green) and E.coli (red). The plot shows the labelled K-mers and their corresponding frequency, and the closeness in shared K-mers between both organisms, but also shows the variation in frequency between the K-mers when expressed in Salmonella compared to E.coli.
+The plot above shows the underrepresented 3 Amino acid length K-mers in both *Salmonella* (green) and *E.coli* (red). The plot shows the labelled K-mers and their corresponding frequency, and the closeness in shared K-mers between both organisms, but also shows the variation in frequency between the K-mers when expressed in *Salmonella* compared to E.coli.
 
-The variation in K-mer expression in Salmonella and E.coli is due to the differnces in nucleotide sequences which create the protiens, which then creat the 3,4,5 length K-mers.
+The variation in K-mer expression in *Salmonella* and *E.coli* is due to the differnces in nucleotide sequences which create the protiens, which then creat the 3,4,5 length K-mers.
 
 
 
