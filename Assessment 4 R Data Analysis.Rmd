@@ -172,7 +172,6 @@ To provide the table above, a data frame was created with the mean and standard 
 
 # **Part 2**
 
-
 ```{r include=FALSE}
 install.packages("seqinr")
 library("seqinr")
@@ -180,9 +179,7 @@ install.packages("R.utils")
 library("R.utils")
 ```
 
-
 ### Downloading Coding DNA of *Salmonella*
-
 ```{r}
 salmonella_URL <- "https://ftp.ensemblgenomes.ebi.ac.uk/pub/bacteria/release-59/fasta/bacteria_50_collection/salmonella_enterica_subsp_enterica_serovar_weltevreden_gca_005518735/cds/Salmonella_enterica_subsp_enterica_serovar_weltevreden_gca_005518735.ASM551873v1.cds.all.fa.gz"
 download.file(salmonella_URL,destfile = "Salmonella.fa.gz")
@@ -194,7 +191,6 @@ To download the *Salmonella enterica* subsp. enterica serovar Weltevreden (GCA_0
 
 
 ### Downloading Coding DNA of *E.coli*
-
 ```{r}
 ecoli_URL <- "http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz"
 
@@ -340,9 +336,7 @@ salmonella_aa_prop <- salmonella_aa_totals/sum(salmonella_aa_totals)
 salmonella_aa_prop
 ```
 
-
 ### *E.coli* Protein sequence frequency
-
 ```{r}
 e_coli_prot <- lapply(e_coli, translate)
 
@@ -387,6 +381,7 @@ part 2 - question 5 will go here!!!
 ```{r}
 salmonella_prot <- lapply(salmonella, translate)
 salmonella_prots <- unlist(salmonella_prot)
+
 head(salmonella_prots)
 
 aa <- unique(salmonella_prot[[2]])
@@ -568,6 +563,8 @@ text(head(under_salmonella_counts_3,10),
 ```
 
 The plot above shows the underrepresented 3 Amino acid length K-mers in both Salmonella (green) and E.coli (red). The plot shows the labelled K-mers and their corresponding frequency, and the closeness in shared K-mers between both organisms, but also shows the variation in frequency between the K-mers when expressed in Salmonella compared to E.coli.
+
+The variation in K-mer expression in Salmonella and E.coli is due to the differnces in nucleotide sequences which create the protiens, which then creat the 3,4,5 length K-mers.
 
 
 
