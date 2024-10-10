@@ -53,15 +53,15 @@ The code used in Part 2 Question 1, was used to download the DNA sequence of E.c
 -	Library(“seqinr”), which loads into the library the seqinr package which has specific programs and functions.
 -	Library(“R.utils”), which loads into the library the R.Utils package which has specific programs and functions.
 
--	Making the value URL2 equal to the html file of the Salmonella enterica subsp. enterica serovar Weltevreden, which was found on the website ensembl.
--	The download.file command used to download the value UR2L, and name the file “salmonella.fa.gz”.
+-	Making the value salmonella_URL equal to the html file of the Salmonella enterica subsp. enterica serovar Weltevreden, which was found on the website ensembl.
+-	The download.file command used to download the value salmonella_URL, and name the file “salmonella.fa.gz”.
 -	The gunzip command extracts the fasta file from a zip file.
 -	The list.files() command was used to ensure the download of the “salmonella.fa” file was correct and complete.
 -	The seqinr::read.fasta command was used to read the fasta data of the “salmonella.fa” file and create a value of salmonella for the data.
 -	The length() command was used to determine the length of the salmonella fasta file.
 
--	Making the value URL3 equal to the html file of the Escherichia coli str. K-12 substr. MG1655 str. K12 which was found on the website ensembl.
--	The download.file command used to download the value UR2L, and name the file “ecoli.fa.gz”.
+-	Making the value ecoli_URL equal to the html file of the Escherichia coli str. K-12 substr. MG1655 str. K12 which was found on the website ensembl.
+-	The download.file command used to download the value ecoli_URL, and name the file “ecoli.fa.gz”.
 -	The gunzip command extracts the fasta file from a zip file.
 -	The list.files() command was used to ensure the download of the “ecoli.fa” file was correct and complete.
 -	The seqinr::read.fasta command was used to read the fasta data of the “e.coli.fa” file and create a value of e_coli for the data.
