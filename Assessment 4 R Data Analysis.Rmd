@@ -189,6 +189,8 @@ boxplot(growth_data$Circumf_2020_cm ~ growth_data$Site,
         xlab = "Site", ylab = "Circumference (cm)",
         col = c("lightblue", "lightgreen"))
 
+we will see two separate box plots. The first box will show how the tree circumference distributed across both sites in 2005, and the second box will show the distribution in 2020. This gives  us an understanding of growth over time and how it differs between the two sites.
+
 ## **Q9**
 
 # Calculating the growth between 2010 and 2020 for both sites
@@ -206,6 +208,13 @@ mean_growth_southwest_10yr <- mean(growth_southwest_10yr$Growth_10yr)
 mean_growth_northeast_10yr
 mean_growth_southwest_10yr
 
+This will give two numeric values:
+
+Mean growth at the northeast site over the last 10 years is 42.94
+Mean growth at the southwest site over the last 10 years is 35.49
+
+These values tell us how much the tree circumference increased on average at each site.
+
 ## **Q10**
 
 # Performing t-test to compare the 10-year growth between the two sites
@@ -215,9 +224,10 @@ t_test_result <- t.test(growth_data$Growth_10yr ~ growth_data$Site)
 t_test_result$p.value
 
 
+The p-value will be a number between 0 and 1:
 
-
-
+If the p-value < 0.05, we conclude that the 10-year growth is significantly different between the two sites.
+If the p-value >= 0.05, we conclude that there is no significant difference in growth between the two sites.
 
 
 
