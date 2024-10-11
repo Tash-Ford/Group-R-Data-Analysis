@@ -403,7 +403,7 @@ e_coli_aa_prop <- e_coli_aa_totals/sum(e_coli_aa_totals)
 
 e_coli_aa_prop
 ```
-To translate all sequences in the data to proteins sequences, the lapply() command is applied. To define the amino acid alphabet, unique() extracts unique amino acids while salmonella_aa[salmonella_aa != "*"] removes any unknown amino acids. This is then used as a reference when using lapply(x,count()) to calculate the amount of each amino acid in the sequences. do.call(rbind,x) is usually for combining more complex amounts of data into 1 data frame, however it is still effective here. colSums calculates the total of each column, in this case, it add the amount of each amino acid across the sequences. The proportion of each total is calculated by dividing each total by the overall total. The results are then displayed.
+To translate all sequences in the data to proteins sequences, the lapply() command is applied. To define the amino acid alphabet, unique() extracts unique amino acids while e_coli_aa[e_coli_aa != "*"] removes any unknown amino acids. This is then used as a reference when using lapply(x,count()) to calculate the amount of each amino acid in the sequences. do.call(rbind,x) is usually for combining more complex amounts of data into 1 data frame, however it is still effective here. colSums calculates the total of each column, in this case, it add the amount of each amino acid across the sequences. The proportion of each total is calculated by dividing each total by the overall total. The results are then displayed.
 
 
 ### Bar plot for *E.coli* amino acid frequency
@@ -411,7 +411,7 @@ To translate all sequences in the data to proteins sequences, the lapply() comma
 ```{r}
 barplot(e_coli_aa_prop,xlab="Amino Acids",ylab="Frequency", main="E coli Amino Acid Frequency")
 ```
-The frequency of each protein is displayed as a barplot with the barplot() command. The plot heading is determined with "main", the x and y axis labels are determined using "xlab" and "ylab" respectively.
+The frequency of each amino acid is displayed as a barplot with the barplot() command. The plot heading is determined with "main", the x and y axis labels are determined using "xlab" and "ylab" respectively.
 
 
 ### Bar plot for *Salmonella* amino acid frequency
@@ -420,7 +420,7 @@ The frequency of each protein is displayed as a barplot with the barplot() comma
 barplot(salmonella_aa_prop,xlab="Amino Acids",ylab="Frequency", main="Salmonella Amino Acid Frequency")
 
 ```
-The frequency of each protein is displayed as a barplot with the barplot() command. The plot heading is determined with "main", the x and y axis labels are determined using "xlab" and "ylab" respectively.
+The frequency of each amino acid is displayed as a barplot with the barplot() command. The plot heading is determined with "main", the x and y axis labels are determined using "xlab" and "ylab" respectively.
 
 Nucleotide frequency and their distributions, as shown in the barplots, are quite similar between the 2 organisms indicating functional similarities. 
 As the amino acid barplots indicate, most amino acid frequencies across the two organisms are similar, however, *E.coli* has data for both C and H where *Salmonella* does not. 
