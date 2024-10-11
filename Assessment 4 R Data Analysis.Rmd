@@ -29,6 +29,7 @@ install.packages("readr")
 library("readr")
 ```
 
+## **Q1**
 
 ### File read in as table.
 
@@ -39,6 +40,7 @@ head(Gene_Expression)
 ```
 Required package, "readr" installed and loaded using install.packages and library() command. Data read in as table with the read.table command, the row.names=1 argument creates rows with the gene identifiers as the names . The head() function displays the first 6 lines of the table. 
 
+## **Q2**
 
 ### Mean data added to table as new column
 ```{r Calculating Mean values}
@@ -47,6 +49,7 @@ head(Gene_Expression)
 ```
 rowMeans is used to calculate the mean value of each row in the data file, those values are then subset using Gene_Expression$Mean_value <- into the file. The head() function displays the first 6 lines of the table.
 
+## **Q3**
 
 ### 10 genes with the highest mean expression
 ```{r 10 genes with the highest mean expression}
@@ -56,6 +59,7 @@ print(Top10_Mean)
 ```
 The order function sorts the data based on the mean values, the - argument must be used to sort in descending order. head(sorted) subsets the top 10 rows into Top10_Mean which can be displayed using print().
 
+## **Q4**
 
 ### Number of genes with a mean <10
 ```{r Number of genes with mean less than 10}
@@ -64,6 +68,7 @@ nrow(Low_Mean)
 ```
 Subset taken of gene expression data with a mean value of less than 10. The rows in the resulting data are counted to get the amount of genes with a mean under 10.
 
+## **Q5**
 
 ### Histogram of Mean Values
 ```{r Histogram of mean gene expression values }
@@ -72,6 +77,8 @@ hist(Gene_Expression$Mean_value,breaks=1000, xlim = c(0,60000), xlab = "Mean Val
 ```
 The Histogram shown in the above figure displays the mean values of the gene expression data.The histogram was created with the hist() command, which produces a histogram plot.
 
+
+## **Q6**
 
 ## Growth Data
 The file “growth_data.csv” contains tree circumferenve measurements for trees growing at both a control site and a treatment site. The trees were planted 20 years ago.
@@ -94,6 +101,7 @@ colnames(growth_data)
 ```
 To determine the column names of the growth data file, the command colnames was used, and the column names of "Site","TreeID", "Circumf_2005_cm", "Circumf_2010_cm", "Circumf_2015_cm"and "Circumf_2020_cm" can be seen in the output above.
 
+## **Q7**
 
 ### Mean and standard deviation at notheast and southwest sites at 2005 and 2020
 
@@ -167,6 +175,13 @@ mean_SD_table
 To provide the table above, a data frame was created with the mean and standard deviation results from the northeast and southwest sites and 2005 and 2020.
 
 
+## **Q8**
+
+
+## **Q9**
+
+
+## **Q10**
 
 
 ******** part 1 questions 8,9,10 to go here 

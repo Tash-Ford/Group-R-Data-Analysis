@@ -417,6 +417,9 @@ library(&quot;dplyr&quot;)</code></pre>
 <pre class="r"><code>#install.packages(&quot;readr&quot;)
 library(&quot;readr&quot;)</code></pre>
 </div>
+</div>
+<div id="q1" class="section level2">
+<h2><strong>Q1</strong></h2>
 <div id="file-read-in-as-table." class="section level3">
 <h3>File read in as table.</h3>
 <pre class="r"><code>Gene_Expression &lt;- read.table(&quot;https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv&quot;,stringsAsFactors = FALSE, header=TRUE, row.names=1)
@@ -442,6 +445,9 @@ command, the row.names=1 argument creates rows with the gene identifiers
 as the names . The head() function displays the first 6 lines of the
 table.</p>
 </div>
+</div>
+<div id="q2" class="section level2">
+<h2><strong>Q2</strong></h2>
 <div id="mean-data-added-to-table-as-new-column" class="section level3">
 <h3>Mean data added to table as new column</h3>
 <pre class="r"><code>Gene_Expression$Mean_value &lt;- rowMeans(Gene_Expression, na.rm = TRUE)
@@ -465,6 +471,9 @@ file, those values are then subset using Gene_Expression$Mean_value
 &lt;- into the file. The head() function displays the first 6 lines of
 the table.</p>
 </div>
+</div>
+<div id="q3" class="section level2">
+<h2><strong>Q3</strong></h2>
 <div id="genes-with-the-highest-mean-expression" class="section level3">
 <h3>10 genes with the highest mean expression</h3>
 <pre class="r"><code>Sorted_Genes &lt;- Gene_Expression[order(-Gene_Expression$Mean_value), ]
@@ -497,6 +506,9 @@ argument must be used to sort in descending order. head(sorted) subsets
 the top 10 rows into Top10_Mean which can be displayed using
 print().</p>
 </div>
+</div>
+<div id="q4" class="section level2">
+<h2><strong>Q4</strong></h2>
 <div id="number-of-genes-with-a-mean-10" class="section level3">
 <h3>Number of genes with a mean &lt;10</h3>
 <pre class="r"><code>Low_Mean &lt;- subset(Gene_Expression, Mean_value &lt; 10)
@@ -506,6 +518,9 @@ nrow(Low_Mean)</code></pre>
 10. The rows in the resulting data are counted to get the amount of
 genes with a mean under 10.</p>
 </div>
+</div>
+<div id="q5" class="section level2">
+<h2><strong>Q5</strong></h2>
 <div id="histogram-of-mean-values" class="section level3">
 <h3>Histogram of Mean Values</h3>
 <pre class="r"><code>hist(Gene_Expression$Mean_value,breaks=1000, xlim = c(0,60000), xlab = &quot;Mean Value of Gene Expression&quot;,main=&quot;Histogram of Mean values of Gene Expression&quot;)</code></pre>
@@ -514,6 +529,9 @@ The Histogram shown in the above figure displays the mean values of the
 gene expression data.The histogram was created with the hist() command,
 which produces a histogram plot.</p>
 </div>
+</div>
+<div id="q6" class="section level2">
+<h2><strong>Q6</strong></h2>
 </div>
 <div id="growth-data" class="section level2">
 <h2>Growth Data</h2>
@@ -554,6 +572,9 @@ colnames was used, and the column names of “Site”,“TreeID”,
 “Circumf_2005_cm”, “Circumf_2010_cm”, “Circumf_2015_cm”and
 “Circumf_2020_cm” can be seen in the output above.</p>
 </div>
+</div>
+<div id="q7" class="section level2">
+<h2><strong>Q7</strong></h2>
 <div id="mean-and-standard-deviation-at-notheast-and-southwest-sites-at-2005-and-2020" class="section level3">
 <h3>Mean and standard deviation at notheast and southwest sites at 2005
 and 2020</h3>
@@ -657,13 +678,22 @@ mean_SD_table</code></pre>
 <p>To provide the table above, a data frame was created with the mean
 and standard deviation results from the northeast and southwest sites
 and 2005 and 2020.</p>
-<p>******** part 1 questions 8,9,10 to go here</p>
 </div>
+</div>
+<div id="q8" class="section level2">
+<h2><strong>Q8</strong></h2>
+</div>
+<div id="q9" class="section level2">
+<h2><strong>Q9</strong></h2>
+</div>
+<div id="q10" class="section level2">
+<h2><strong>Q10</strong></h2>
+<p>******** part 1 questions 8,9,10 to go here</p>
 </div>
 </div>
 <div id="part-2" class="section level1">
 <h1><strong>Part 2</strong></h1>
-<div id="q1" class="section level2">
+<div id="q1-1" class="section level2">
 <h2><strong>Q1</strong></h2>
 <div id="downloading-coding-dna-of-salmonella" class="section level3">
 <h3>Downloading Coding DNA of <em>Salmonella</em></h3>
@@ -705,7 +735,7 @@ can see a difference in length between <em>Salmonella</em> and
 sequences and <em>E.coli</em> having 4239 coding DNA sequences.</p>
 </div>
 </div>
-<div id="q2" class="section level2">
+<div id="q2-1" class="section level2">
 <h2><strong>Q2</strong></h2>
 <div id="coding-dna-in-salmonella-and-e-coli" class="section level3">
 <h3>Coding DNA in <em>Salmonella</em> and <em>E-coli</em></h3>
@@ -734,7 +764,7 @@ with <em>Salmonella</em> having 4294851 coding DNA base pairs and
 <em>E.coli</em> having 3978528 coding DNA base pairs.</p>
 </div>
 </div>
-<div id="q3" class="section level2">
+<div id="q3-1" class="section level2">
 <h2><strong>Q3</strong></h2>
 <div id="length-of-all-coding-sequences-in-salmonella" class="section level3">
 <h3>Length of all coding sequences in <em>Salmonella</em></h3>
@@ -824,7 +854,7 @@ differences can indicate different genetic expression and
 functionality.</p>
 </div>
 </div>
-<div id="q4" class="section level2">
+<div id="q4-1" class="section level2">
 <h2><strong>Q4</strong></h2>
 <div id="frequency-of-dna-bases" class="section level3">
 <h3>Frequency of DNA bases</h3>
@@ -965,11 +995,11 @@ acid frequencies across the two organisms are similar, however,
 not.</p>
 </div>
 </div>
-<div id="q5" class="section level2">
+<div id="q5-1" class="section level2">
 <h2><strong>Q5</strong></h2>
 <p>part 2 - question 5 will go here!!!</p>
 </div>
-<div id="q6" class="section level2">
+<div id="q6-1" class="section level2">
 <h2><strong>Q6</strong></h2>
 <div id="creating-amino-acid-alphabet-and-unlisting-salmonella-proteins" class="section level3">
 <h3>Creating amino acid alphabet and unlisting <em>Salmonella</em>
