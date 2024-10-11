@@ -4,12 +4,31 @@ Group R Data Analysis
 ## Part 1 
 
 ### Question 1
+The code in part 1, question 1 reads the data file in as a table. It then displays the first 6 rows in the table.
+
+-	Required package, “readr” installed and loaded using install.packages and library() command. 
+-	Data read in as table with the read.table command, the row.names=1 argument creates rows with the gene identifiers as the names. stringsAsFactors=FALSE keeps character vectors. Header=TRUE uses the first row as column names. Row.names=1 uses the first column as row names.  
+-	The head() function displays the first 6 lines of the table.
 
 ### Question 2
+The code in part 1, question 2 creates a new column in the table with the means values of the rows.
+
+-	rowMeans is used to calculate the mean value of each row in the data file, those values are then subset using Gene_Expression$Mean_value <- into the file. na.rm = TRUE tells the command to ignore any missing values.
+-	The head() function displays the first 6 lines of the table.
 
 ### Question 3
+The code in part 1, question 3 lists the 10 genes with the highest mean expression.
+
+-	The order function sorts the data based on the mean values, the - argument must be used to sort in descending order. 
+-	head(sorted) subsets the top 10 rows into Top10_Mean 
+-	print() displays the data.
+
 
 ### Question 4
+The code in part 1, question 4 finds the number of genes that have a mean less than 10.
+
+-	Subset() takes gene expression data with a mean value of less than 10 and adds to the Low_Mean value. 
+-	nrow() counts the data to get the number of genes with a mean under 10.
 
 ### Question 5
 The code in Part 1 Question five is used to create a histogram of the mean values of the gene expression data. The histogram creates a visual presentation of this data.
@@ -90,8 +109,79 @@ o	The sum(e_coli_length) command ,sums the e_coli_length value, which provides t
 -	To present the data in a table the as.table command was used, to create a table with the  provided information, in combination with the command rbind, which joins multiple rows together, using the command c, which concatenates the length of all salmonella coding DNA and the length of all e.coli coding DNA, into one row. The colnames command was used to name the columns of the table “Salmonella” and “E-coli”. The rowname command was used to name the row “Total coding DNA”. To call the table the value table2 was used to present the data into the table.
 
 ### Question 3
+The code in part 2, question 3 calculates the length of all coding sequences in each organism. It also produces a boxplot and calculates mean and median values.
+
+-	salmonella_csl <- sapply(salmonella, length) : sapply works as a loop function when calculating the length of each sequence in the Salmonella data 
+-	head(salmonella_csl,25) : displays the first 25 lines. 25 was chosen to limit the amount of raw data displayed.
+
+
+-	e_coli_csl <- sapply(e_coli, length) : sapply works as a loop function when calculating the length of each sequence in the E.coli data 
+-	head(e_coli_csl,25) : displays the first 25 lines. 25 was chosen to limit the amount of raw data displayed.
+
+
+-	boxplot(salmonella_csl, e_coli_csl,        ylab="Sequence Length",        main="Coding Sequence Length",        names = c("Salmonella","E.coli")) : creates a boxplot of both the Salmonella and the E.coli data. The heading of the plot is changed with the ‘main’ argument, the y axis label with ‘ylab’ and the names of each individual plot with the ‘names’ argument. 
+
+
+-	mean(salmonella_csl) : calculates the average value, in this case the length, of every sequence.
+-	median(salmonella_csl) : calculates the middle value of all the sequences.
+
+
+-	mean(e_coli_csl) : calculates the average value, in this case the length, of every sequence.
+-	median(e_coli_csl) : calculates the middle value of all the sequences.
 
 ### Question 4
+The code is part 2, question 4 calculates the frequency of both nucleotides and amino acids. Barplots are created for both data types.
+
+Frequency of DNA bases:
+
+-	salmonella_DNA <- unlist(salmonella) : converts the list data into a vector making it easier for analysis
+-	salmonella_DNA_comp <- count(salmonella_DNA,1) : used to calculate the amount of each nucleotide in each sequence, <- stores the results in the _comp values
+-	salmonella_DNA_prop <- salmonella_DNA_comp/sum(salmonella_DNA_comp) : Dividing the _comp data by the sum of itself determines the frequency as a percentage in decimal form
+-	salmonella_DNA_prop : displays the data stored in the value
+
+-	e_coli_DNA <- unlist(e_coli) : converts the list data into a vector amking it easier for analysis
+-	e_coli_DNA_comp <- count(e_coli_DNA,1) : used to calculate the amount of each nucleotide in each sequence, <- stores the results in the _comp values
+-	e_coli_DNA_prop <- e_coli_DNA_comp/sum(e_coli_DNA_comp) : Dividing the _comp data by the sum of itself determines the frequency as a percentage in decimal form
+-	e_coli_DNA_prop : displays the data stored in the value
+
+Barplots:
+
+-	barplot(salmonella_DNA_prop,xlab="Nucleotides",ylab="Frequency", main="Salmonella nucleotide frequency") : The frequency of nucleotides is displayed as a barplot with the barplot() command. The plot heading is determined with “main”, the x and y axis labels are determined using “xlab” and “ylab” respectively.
+
+-	barplot(e_coli_DNA_prop,xlab="Nucleotides",ylab="Frequency", main="E coli nucleotide frequency") : The frequency of nucleotides is displayed as a barplot with the barplot() command. The plot heading is determined with “main”, the x and y axis labels are determined using “xlab” and “ylab” respectively.
+
+Salmonella protein sequence frequency:
+
+-	salmonella_prot <- lapply(salmonella, translate) : translates all sequences in the dataset to proteins sequences
+-	salmonella_aa <- unique(salmonella_prot[[2]])
+salmonella_aa <- salmonella_aa[salmonella_aa != "*"] : To define the amino acid alphabet, unique() extracts unique amino acids while salmonella_aa[salmonella_aa != “*”] removes any unknown amino acids. 
+-	salmonella_aa_len <- length(salmonella_aa_len) : calculates length and adds to a value
+-	salmonella_aa_count <- lapply(salmonella_prot, function(sequence) {  count(sequence, wordsize = 1, alphabet = salmonella_aa)}) : The aa alphabet is used calculate the number of each amino acid in the sequences using count(). Wordsize=1 sets the number of characters in the word to 1.
+-	salmonella_aa_table <- do.call(rbind, salmonella_aa_count) : creates a table with the count data
+-	salmonella_aa_totals <- colSums(salmonella_aa_table) : calculates the total of each column, in this case, it adds the amount of each amino acid across the sequences
+-	salmonella_aa_prop <- salmonella_aa_totals/sum(salmonella_aa_totals) : The proportion of each total is calculated by dividing each total by the overall total
+-	salmonella_aa_prop : displays the resulting data
+
+E.coli Protein sequence frequency
+
+-	e_coli_prot <- lapply(e_coli, translate) : translates all sequences in the dataset to proteins sequences
+-	e_coli_aa <- unique(e_coli_prot[[2]]) 
+e_coli_aa <- e_coli_aa[e_coli_aa != "*"] : To define the amino acid alphabet, unique() extracts unique amino acids while e_coli _aa e_coli _aa != “*”] removes any unknown amino acids.
+-	e_coli_aa_len <- length(e_coli_aa) : calculates length and adds to a value
+-	e_coli_aa_count <- lapply(e_coli_prot, function(sequence) {  count(sequence, wordsize = 1, alphabet = e_coli_aa)}) : The aa alphabet is used calculate the number of each amino acid in the sequences using count(). Wordsize=1 sets the number of characters in the word to 1.
+-	e_coli_aa_table <- do.call(rbind, e_coli_aa_count) : creates a table with the count data
+-	e_coli_aa_totals <- colSums(e_coli_aa_table) : calculates the total of each column, in this case, it adds the amount of each amino acid across the sequences
+-	e_coli_aa_prop <- e_coli_aa_totals/sum(e_coli_aa_totals) : The proportion of each total is calculated by dividing each total by the overall total
+-	e_coli_aa_prop : displays the resulting data
+
+Bar plot for E.coli amino acid frequency
+
+-	barplot(e_coli_aa_prop,xlab="Amino Acids",ylab="Frequency", main="E coli Amino Acid Frequency") : The frequency of each amino acid is displayed as a barplot with the barplot() command. The plot heading is determined with “main”, the x and y axis labels are determined using “xlab” and “ylab” respectively.
+
+Bar plot for Salmonella amino acid frequency
+
+-	barplot(salmonella_aa_prop,xlab="Amino Acids",ylab="Frequency", main="Salmonella Amino Acid Frequency") : The frequency of each amino acid is displayed as a barplot with the barplot() command. The plot heading is determined with “main”, the x and y axis labels are determined using “xlab” and “ylab” respectively.
+
 
 ### Question 5
 
