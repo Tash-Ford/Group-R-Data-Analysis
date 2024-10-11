@@ -3,7 +3,6 @@ title: "Assessment 4 R Data Analysis"
 author: "Natasha Ford, Kahla Finch, Devanshee Alpeshkumar Gandhi"
 date: "2024-09-25"
 output: html_document
-fig_width: 10
 ---
 
 # **Part 1**
@@ -409,21 +408,7 @@ barplot(salmonella_aa_prop,xlab="Amino Acids",ylab="Frequency", main="Salmonella
 The frequency of each protein is displayed as a barplot with the barplot() command. The plot heading is determined with "main", the x and y axis labels are determined using "xlab" and "ylab" respectively.
 
 Nucleotide frequency and their distributions, as shown in the barplots, are quite similar between the 2 organisms indicating functional similarities. 
-
-```{r}
-combined_aa_data <- rbind(salmonella_aa_prop, e_coli_aa_prop)
-barplot(combined_aa_data, 
-        beside = TRUE, 
-        xlab = "Amino Acids", 
-        ylab = "Frequency", 
-        main = "Amino Acid Frequency Comparison", 
-        col = c("skyblue", "lightgreen"),
-        legend.text = c("Salmonella", "E. coli"),
-        args.legend = list(x = "topright", bty = "n", inset=c(-0.05, -0.2)))
-```
-To better visualise differences in amino acid frequencies, both sets of data were combined with rbind. The resulting data was plotted using barplot(). Plot labels designated with xlab, ylab and main. Columns were coloured with col=c() and a legend added. To ensure the legend was not covering important data, args.legend = list(x = "topright", bty = "n", inset=c(-0.05, -0.2)) was used to place the legend at the top right away from data.
-
-
+As the amino acid barplots indicate, most amino acid frequencies across the two organisms are similar, however, *E.coli* has data for both C and H where *Salmonella* does not. 
 
 
 ## **Q5**
