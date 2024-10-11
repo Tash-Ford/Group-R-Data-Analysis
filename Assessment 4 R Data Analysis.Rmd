@@ -679,16 +679,7 @@ text(head(under_salmonella_counts_3,10),
 
 The plot above shows the underrepresented 3 Amino acid length K-mers in both *Salmonella* (green) and *E.coli* (red). The plot shows the labelled K-mers and their corresponding frequency, and the closeness in shared K-mers between both organisms, but also shows the variation in frequency between the K-mers when expressed in *Salmonella* compared to E.coli.
 
-The variation in K-mer expression in *Salmonella* and *E.coli* is due to the differnces in nucleotide sequences which create the protiens, which then create the 3,4,5 length K-mers.
-
-
-
-### Session Info
-```{r}
-sessionInfo()
-```
-
-
+The variation in K-mer expression in *Salmonella* and *E.coli* is due to the differences in nucleotide sequences which create the proteins, which then create the 3,4,5 length K-mers.
 
 
 ### Session Info
