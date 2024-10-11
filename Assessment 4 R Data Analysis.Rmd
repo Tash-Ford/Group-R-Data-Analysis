@@ -177,14 +177,47 @@ To provide the table above, a data frame was created with the mean and standard 
 
 ## **Q8**
 
+# Box plot for tree circumference in 2005 (start of the study)
+boxplot(growth_data$Circumf_2005_cm ~ growth_data$Site, 
+        main = "Tree Circumference in 2005 by Site",
+        xlab = "Site", ylab = "Circumference (cm)",
+        col = c("lightblue", "lightgreen"))
+
+# Box plot for tree circumference in 2020 (end of the study)
+boxplot(growth_data$Circumf_2020_cm ~ growth_data$Site, 
+        main = "Tree Circumference in 2020 by Site",
+        xlab = "Site", ylab = "Circumference (cm)",
+        col = c("lightblue", "lightgreen"))
 
 ## **Q9**
 
+# Calculating the growth between 2010 and 2020 for both sites
+growth_data$Growth_10yr <- growth_data$Circumf_2020_cm - growth_data$Circumf_2010_cm
+
+# Subsetting the data for northeast and southwest sites
+growth_northeast_10yr <- subset(growth_data, Site == "northeast", select = c("Growth_10yr"))
+growth_southwest_10yr <- subset(growth_data, Site == "southwest", select = c("Growth_10yr"))
+
+# Calculating the mean growth over the last 10 years for each site
+mean_growth_northeast_10yr <- mean(growth_northeast_10yr$Growth_10yr)
+mean_growth_southwest_10yr <- mean(growth_southwest_10yr$Growth_10yr)
+
+# Outputting the mean growth values
+mean_growth_northeast_10yr
+mean_growth_southwest_10yr
 
 ## **Q10**
 
+# Performing t-test to compare the 10-year growth between the two sites
+t_test_result <- t.test(growth_data$Growth_10yr ~ growth_data$Site)
 
-******** part 1 questions 8,9,10 to go here 
+# Outputting the p-value from the t-test
+t_test_result$p.value
+
+
+
+
+
 
 
 
