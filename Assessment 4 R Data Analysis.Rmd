@@ -177,37 +177,50 @@ To provide the table above, a data frame was created with the mean and standard 
 
 ## **Q8**
 
+```{r}
 # Box plot for tree circumference in 2005 (start of the study)
 boxplot(growth_data$Circumf_2005_cm ~ growth_data$Site, 
         main = "Tree Circumference in 2005 by Site",
         xlab = "Site", ylab = "Circumference (cm)",
         col = c("lightblue", "lightgreen"))
+```
 
+```{r}
 # Box plot for tree circumference in 2020 (end of the study)
 boxplot(growth_data$Circumf_2020_cm ~ growth_data$Site, 
         main = "Tree Circumference in 2020 by Site",
         xlab = "Site", ylab = "Circumference (cm)",
         col = c("lightblue", "lightgreen"))
+```
 
 we will see two separate box plots. The first box will show how the tree circumference distributed across both sites in 2005, and the second box will show the distribution in 2020. This gives  us an understanding of growth over time and how it differs between the two sites.
 
 ## **Q9**
 
 # Calculating the growth between 2010 and 2020 for both sites
+
+```{r}
 growth_data$Growth_10yr <- growth_data$Circumf_2020_cm - growth_data$Circumf_2010_cm
+```
 
 # Subsetting the data for northeast and southwest sites
+```{r}
 growth_northeast_10yr <- subset(growth_data, Site == "northeast", select = c("Growth_10yr"))
 growth_southwest_10yr <- subset(growth_data, Site == "southwest", select = c("Growth_10yr"))
+```
 
 # Calculating the mean growth over the last 10 years for each site
+```{r}
 mean_growth_northeast_10yr <- mean(growth_northeast_10yr$Growth_10yr)
 mean_growth_southwest_10yr <- mean(growth_southwest_10yr$Growth_10yr)
+```
 
 # Outputting the mean growth values
+
+```{r}
 mean_growth_northeast_10yr
 mean_growth_southwest_10yr
-
+```
 This will give two numeric values:
 
 Mean growth at the northeast site over the last 10 years is 42.94
@@ -218,11 +231,14 @@ These values tell us how much the tree circumference increased on average at eac
 ## **Q10**
 
 # Performing t-test to compare the 10-year growth between the two sites
+```{r}
 t_test_result <- t.test(growth_data$Growth_10yr ~ growth_data$Site)
+```
 
 # Outputting the p-value from the t-test
+```{r}
 t_test_result$p.value
-
+```
 
 The p-value will be a number between 0 and 1:
 
@@ -662,7 +678,7 @@ text(head(under_salmonella_counts_3,10),
 
 The plot above shows the underrepresented 3 Amino acid length K-mers in both *Salmonella* (green) and *E.coli* (red). The plot shows the labelled K-mers and their corresponding frequency, and the closeness in shared K-mers between both organisms, but also shows the variation in frequency between the K-mers when expressed in *Salmonella* compared to E.coli.
 
-The variation in K-mer expression in *Salmonella* and *E.coli* is due to the differnces in nucleotide sequences which create the protiens, which then creat the 3,4,5 length K-mers.
+The variation in K-mer expression in *Salmonella* and *E.coli* is due to the differnces in nucleotide sequences which create the protiens, which then create the 3,4,5 length K-mers.
 
 
 
