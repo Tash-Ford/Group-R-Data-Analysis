@@ -20,7 +20,7 @@ download.file(URL_P1,destfile="Gene_Expression.csv")
 ```
 Gene expression file was downloaded using the download.file command
 
-```{r Install and load packages}
+```{r Install and load packages, include=FALSE}
 install.packages("dplyr")
 library("dplyr")
 library("seqinr")
@@ -37,7 +37,7 @@ Gene_Expression <- read.table("https://raw.githubusercontent.com/ghazkha/Assessm
 
 head(Gene_Expression)
 ```
-Required package, "readr" installed and loaded using install.packages and library() command. Data read in as table with the read.table command, the row.names=1 argument creates rows with the gene identifiers as the names . The head() function displays the first 6 lines of the table. 
+Required package, "readr" installed and loaded using install.packages and library() command. Data read in as table with the read.table command, the row.names=1 argument creates rows with the gene identifiers as the names. The head() function displays the first 6 lines of the table. 
 
 ## **Q2**
 
@@ -79,7 +79,7 @@ The Histogram shown in the above figure displays the mean values of the gene exp
 ## **Q6**
 
 ## Growth Data
-The file “growth_data.csv” contains tree circumferenve measurements for trees growing at both a control site and a treatment site. The trees were planted 20 years ago.
+The file “growth_data.csv” contains tree circumference measurements for trees growing at both a control site and a treatment site. The trees were planted 20 years ago.
 
 ### Importing growth data csv file into R
 ```{r Import Growth Data file}
@@ -184,7 +184,7 @@ boxplot(growth_data$Circumf_2020_cm ~ growth_data$Site,
         col = c("lightblue", "lightgreen"))
 ```
 
-we will see two separate box plots. The first box will show how the tree circumference distributed across both sites in 2005, and the second box will show the distribution in 2020. This gives  us an understanding of growth over time and how it differs between the two sites.
+Shown above are two separate box plots. The first box will show how the tree circumference is distributed across both sites in 2005, and the second box will show the distribution in 2020. This gives  us an understanding of growth over time and how it differs between the two sites.
 
 ## **Q9**
 
@@ -214,8 +214,8 @@ mean_growth_southwest_10yr
 ```
 This will give two numeric values:
 
-Mean growth at the northeast site over the last 10 years is 42.94
-Mean growth at the southwest site over the last 10 years is 35.49
+Mean growth at the northeast site over the last 10 years is 42.94 cm
+Mean growth at the southwest site over the last 10 years is 35.49 cm
 
 These values tell us how much the tree circumference increased on average at each site.
 
