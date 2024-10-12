@@ -540,7 +540,7 @@ codon_salmonella <- readSet(file="https://ftp.ensemblgenomes.ebi.ac.uk/pub/bacte
 codon_tab_salmonella <- codonTable(codon_salmonella)
 head(codon_tab_salmonella)
 ```
-The Salmonella fasta file was read by the command readSet () to create a codon table, which the first six values of each codon can be seen above.
+The *Salmonella* Fasta file was read by the command readSet () to create a codon table, which the first six values of each codon can be seen above.
 
 ### Codon usage table for E-coli
 ```{r}
@@ -548,40 +548,40 @@ codon_e_coli <- readSet(file="http://ftp.ensemblgenomes.org/pub/bacteria/release
 codon_tab_e_coli <- codonTable(codon_e_coli)
 head(codon_tab_e_coli)
 ```
-The E.coli fasta file was read by the command readSet () to create a codon table, which the first six values of each codon can be seen above.
+The *E.coli* Fasta file was read by the command readSet () to create a codon table, which the first six values of each codon can be seen above.
 
 ### Codon bias for salmonella
 ```{r}
 salmonella_milc <- MILC(codon_tab_salmonella)
 head(salmonella_milc)
 ```
-The codon bias of Salmonella’s first 6 genes is shown above, to find this the MILC() command was used, with the head() command.
+The codon bias of *Salmonella’s* first 6 genes is shown above, to find this the MILC() command was used, with the head() command.
 
 ### Codon bias for E-coli
 ```{r}
 e_coli_milc <- MILC(codon_tab_e_coli)
 head(e_coli_milc)
 ```
-The codon bias of E.coli’s first 6 genes is shown above, to find this the MILC() command was used, with the head() command.
+The codon bias of *E.coli’s* first 6 genes is shown above, to find this the MILC() command was used, with the head() command.
 
-### Histogram of Codon bias in Salmonella
+### Histogram of Codon bias in *Salmonella*
 ```{r}
 hist(salmonella_milc,
      main = "Salmonella Codon Bias Histogram",
      xlab = " Salmonella Codon Bias", ylab = "Frequency",breaks=500)
 ```
-Shown above is a histogram displaying the Salmonella Codon Bias, this was visualised with the hist() command.
+Shown above is a histogram displaying the *Salmonella* Codon Bias, this was visualised with the hist() command.
 
 
-### Histogram of Codon bias in E.coli
+### Histogram of Codon bias in *E.coli*
 ```{r}
 hist(e_coli_milc,
      main = "E.coli Codon Bias Histogram",
      xlab = " E.coli Codon Bis", ylab = "Frequency",breaks=500)
 ```
-Shown above is a histogram displaying the E.coli Codon Bias, this was visualised with the hist() command.
+Shown above is a histogram displaying the *E.coli* Codon Bias, this was visualised with the hist() command.
 
-The Salmonella histogram shows a higher frequency of codon bias around 0.5 to 0.6,with the spread of bias from approximately 0.2 to 1.6. The histogram of E.coli shows a higher frequency of codon bias around 0.5 to 0.6, with the spread of bias being from approximately 0.2 to 1.4. The Codon bias for both Salmonella and E.coli show a similar histogram shape, indicating a similar codon bias between both organisms.
+The *Salmonella* histogram shows a higher frequency of codon bias around 0.5 to 0.6,with the spread of bias from approximately 0.2 to 1.6. The histogram of *E.coli* shows a higher frequency of codon bias around 0.5 to 0.6, with the spread of bias being from approximately 0.2 to 1.4. The Codon bias for both *Salmonella* and *E.coli* show a similar histogram shape, indicating a similar codon bias between both organisms.
 
 ## **Q6**
 
