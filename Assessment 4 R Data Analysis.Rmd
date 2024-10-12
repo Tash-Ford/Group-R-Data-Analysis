@@ -73,6 +73,7 @@ Subset taken of gene expression data with a mean value of less than 10. The rows
 ```{r Histogram of mean gene expression values }
 hist(Gene_Expression$Mean_value,breaks=1000, xlim = c(0,60000), xlab = "Mean Value of Gene Expression",main="Histogram of Mean values of Gene Expression")
 ```
+
 The Histogram shown in the above figure displays the mean values of the gene expression data.The histogram was created with the hist() command, which produces a histogram plot.
 
 ## **Q6**
