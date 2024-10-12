@@ -28,7 +28,6 @@ library("R.utils")
 install.packages("readr")
 library("readr")
 ```
-
 ## **Q1**
 
 ### File read in as table.
