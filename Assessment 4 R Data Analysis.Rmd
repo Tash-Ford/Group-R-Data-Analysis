@@ -166,17 +166,16 @@ mean_SD_table
 To provide the table above, a data frame was created with the mean and standard deviation results from the northeast and southwest sites and 2005 and 2020.
 
 ## **Q8**
-
+### Box plot for tree circumference in 2005 (start of the study)
 ```{r}
-# Box plot for tree circumference in 2005 (start of the study)
 boxplot(growth_data$Circumf_2005_cm ~ growth_data$Site, 
         main = "Tree Circumference in 2005 by Site",
         xlab = "Site", ylab = "Circumference (cm)",
         col = c("lightblue", "lightgreen"))
 ```
 
+### Box plot for tree circumference in 2020 (end of the study)
 ```{r}
-# Box plot for tree circumference in 2020 (end of the study)
 boxplot(growth_data$Circumf_2020_cm ~ growth_data$Site, 
         main = "Tree Circumference in 2020 by Site",
         xlab = "Site", ylab = "Circumference (cm)",
@@ -187,25 +186,25 @@ Shown above are two separate box plots. The first box will show how the tree cir
 
 ## **Q9**
 
-# Calculating the growth between 2010 and 2020 for both sites
+### Calculating the growth between 2010 and 2020 for both sites
 
 ```{r}
 growth_data$Growth_10yr <- growth_data$Circumf_2020_cm - growth_data$Circumf_2010_cm
 ```
 
-# Subsetting the data for northeast and southwest sites
+### Subsetting the data for northeast and southwest sites
 ```{r}
 growth_northeast_10yr <- subset(growth_data, Site == "northeast", select = c("Growth_10yr"))
 growth_southwest_10yr <- subset(growth_data, Site == "southwest", select = c("Growth_10yr"))
 ```
 
-# Calculating the mean growth over the last 10 years for each site
+### Calculating the mean growth over the last 10 years for each site
 ```{r}
 mean_growth_northeast_10yr <- mean(growth_northeast_10yr$Growth_10yr)
 mean_growth_southwest_10yr <- mean(growth_southwest_10yr$Growth_10yr)
 ```
 
-# Outputting the mean growth values
+### Outputting the mean growth values
 
 ```{r}
 mean_growth_northeast_10yr
@@ -220,12 +219,12 @@ These values tell us how much the tree circumference increased on average at eac
 
 ## **Q10**
 
-# Performing t-test to compare the 10-year growth between the two sites
+### Performing t-test to compare the 10-year growth between the two sites
 ```{r}
 t_test_result <- t.test(growth_data$Growth_10yr ~ growth_data$Site)
 ```
 
-# Outputting the p-value from the t-test
+### Outputting the p-value from the t-test
 ```{r}
 t_test_result$p.value
 ```
