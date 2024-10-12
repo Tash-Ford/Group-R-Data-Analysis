@@ -457,8 +457,7 @@ As the amino acid barplots indicate, most amino acid frequencies across the two 
 
 ## **Q5**
 
-### Codon Usage Table for Salmonella and E.coli
-
+```{r}
 # Define function to calculate codon usage
 codon_usage <- function(sequence_list) {
   codons <- c()
@@ -523,6 +522,7 @@ barplot(as.matrix(rscu_table[, -1]),
         xlab = "Codons",
         ylab = "RSCU Value",
         main = "Codon Usage Bias Comparison (RSCU)")
+```
 
 ## **Q6**
 
