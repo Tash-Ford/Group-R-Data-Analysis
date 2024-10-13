@@ -184,6 +184,21 @@ Bar plot for Salmonella amino acid frequency
 
 
 ### Question 5
+-	To install the Package coRdon, the install.packages() command was used.
+-	To create a codon table for the salmonella organism, the readSet() command was used to read the salmonella fasta file.
+-	codonTable() command was used to create the codon table of salmonella, including the length of the gene.
+-	The head() command is used to display the first six genes of the codon table of salmonella.
+-	To create a codon table for the e.coli organism, the readSet() command was used to read the e.coli fasta file.
+-	codonTable() command was used to create the codon table of e.coli, including the length of the gene.
+-	The head() command is used to display the first six genes of the codon table of e.coli
+-	The MILC () command is used to get the relative synonymous codon usage (RSCU) of each gene in salmonella.
+-	The head() command Is used to display the first 6 RSCU values of the genes in salmonella.
+-	The MILC () command is used to get the relative synonymous codon usage (RSCU) of each gene in e.coli.
+-	The head() command Is used to display the first 6 RSCU values of the genes in e.coli.
+-	The hist() command was used to create a histogram of the RSCU value of salmonella, with breaks=500, to create 500 breaks in the histogram to visualise the RSCU.
+-	The hist() command was used to create a histogram of the RSCU value of e.coli, with breaks=500, to create 500 breaks in the histogram to visualise the RSCU.
+
+
 
 ### Question 6
 -	The lapply() command used with the translate command, translated the salmonella nucleotide sequence into a protein sequence. The unlist command converts the protein sequence into a single character vector.
