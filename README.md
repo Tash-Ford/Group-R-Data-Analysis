@@ -58,12 +58,26 @@ The code in Part 1 Question 7 is used to calculate the mean and standard deviati
 -	To find the standard deviation  the sd() command was used on each of the subsets to find the desired mean of each site and the year.
 
 ### Question 8
+The code in Part 1 Question 8 is used to create box plots that visualize the tree circumference for both the northeast and southwest sites in 2005 and 2020.
 
+- To create these box plots, I used the boxplot() function, which compares the distribution of tree circumferences between the two sites for the two years. The first plot shows the data for 2005, while the second plot shows the data for 2020. This allows a visual comparison of tree growth over time at both sites.
+- Labels and titles were added using the xlab(), ylab(), and main() arguments to ensure clarity in understanding the plot's axes and the overall comparison.
+  
 ### Question 9
 
+The code in Part 1 Question 9 is used to calculate the mean growth of tree circumference over the last 10 years (from 2010 to 2020) at both the northeast and southwest sites.
+
+- To do this, I first created a new column in the dataset called Growth_10yr, which holds the difference between the 2020 and 2010 tree circumference values. This gives the growth for each tree over this 10-year period.
+- Next, I used the subset() function to separate the data into northeast and southwest sites. After subsetting, the mean() function was applied to calculate the average growth at each site over the 10-year span.
+- This provided a clear understanding of how much the tree circumference grew on average at each site between 2010 and 2020.
+  
 ### Question 10
 
+The code in Part 1 Question 10 is used to perform a t-test to compare the 10-year growth in tree circumference between the northeast and southwest sites.
 
+- I used the t.test() function to statistically compare the growth between the two sites over the last 10 years. The p-value from this test was used to determine if there is a significant difference in growth between the sites.
+- If the p-value is less than 0.05, we would conclude that the growth is significantly different between the sites.However, in this case, the p-value was 0.062, indicating no statistically significant difference in growth between the northeast and southwest sites over the 10-year period.
+  
 ## Part 2
 
 ### Question 1
