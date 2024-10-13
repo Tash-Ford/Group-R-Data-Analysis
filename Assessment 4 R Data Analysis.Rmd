@@ -3,8 +3,8 @@ title: "Assessment 4 R Data Analysis"
 author: "Natasha Ford, Kahla Finch, Devanshee Alpeshkumar Gandhi"
 date: "2024-09-25"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 # **Part 1**
